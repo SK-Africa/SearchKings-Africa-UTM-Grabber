@@ -2,10 +2,10 @@
 /**
  * Plugin Name: UTM Grabber
  * Description: A plugin that dynamically updates an anchor tag link with UTM parameters from the current URL.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: SearchKings Africa
  * License: MIT
- * Text Domain: utm-grabber
+ * Text Domain: sk-utm-grabber
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
