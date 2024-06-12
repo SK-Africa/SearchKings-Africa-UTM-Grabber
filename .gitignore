@@ -1,0 +1,44 @@
+# Node modules directory (if you're using Node.js for build tools)
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Temporary directories
+tmp/
+temp/
+
+# Build directories
+dist/
+build/
+sk-utm-grabber-plugin-temp/
+
+# Plugin zip files
+*.zip
+
+# IDE-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignoring the build script itself (if you prefer)
+build-plugin.sh
+
+# Composer (if using PHP dependencies)
+vendor/
+composer.lock
+
+# PHPStorm specific files
+/.idea
+*.iml
+
+# Ignore macOS specific files
+._*
