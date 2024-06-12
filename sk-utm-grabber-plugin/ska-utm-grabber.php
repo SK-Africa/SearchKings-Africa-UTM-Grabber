@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: UTM Grabber
+ * Plugin Name: SKA UTM Grabber
  * Description: A plugin that dynamically updates an anchor tag link with UTM parameters from the current URL.
  * Version: 1.0.1
  * Author: SearchKings Africa
@@ -81,7 +81,7 @@ function utm_grabber_settings_section_callback() {
 function utm_grabber_options_page() {
     ?>
     <form action='options.php' method='post'>
-        <h1><?php esc_html_e( 'UTM Grabber Settings', 'utm-grabber' ); ?></h1>
+        <h1><?php esc_html_e( 'SKA UTM Grabber Settings', 'utm-grabber' ); ?></h1>
         <?php
         settings_fields( 'utmGrabber' );
         do_settings_sections( 'utmGrabber' );
