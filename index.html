@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Anchor Tag Link</title>
+</head>
+<body>
+    <p>Whatsapp call to action <a id="sudonim-link"
+        href="https://rply.link/d/27600899357/SKWA?Link=https://searchkingsafrica.com/">Whatsapp</a></p>
+    </body>
+    <script>
+       function processUrl(){
+            // We check utms and if they exist we get utms
+            if (!window.location.href.includes('utm')) return;
+         
+            const originalUrl = window.location.href;
+            const originalUrlObject = new URL(originalUrl);
+            const queryString = originalUrlObject.search;
+            // console.log('Url',originalUrl);
+            // console.log('Search Param:',queryString);
+
+
+            // We get the sudonim link provided
+            const sudonimATag = document.getElementById('sudonim-link');
+            // console.log('Sudo Link:', sudonimATag.href); // Loggin to see if it is there
+            const newBaseUrl = sudonimATag.href; // assigning the sudonim as the new base url
+        
+            // Appending and modifying the utms to the new base url basically the sudonim link provided
+            let newUrl;
+            if(newBaseUrl.includes('?')) {
+                const modifiedQueryString = queryString.replace('?','&');
+                newUrl = newBaseUrl + modifiedQueryString;
+                sudonimATag.href = newUrl
+            } else {
+                newUrl = newBaseUrl + queryString;
+                sudonimATag.href = newUrl
+            }
+        
+            // console.log('New URL:', newUrl);
+       }
+       processUrl();
+    </script>
+    </html>
