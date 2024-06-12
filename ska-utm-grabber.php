@@ -5,6 +5,7 @@
  * Version: 1.0
  * Author: SearchKings Africa
  * License: MIT
+ * Text Domain: utm-grabber
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -36,14 +37,13 @@ add_shortcode( 'ska_utm_grabber_anchor', 'ska_utm_grabber_anchor_shortcode' );
 // Add settings page
 function utm_grabber_add_admin_menu() {
     add_options_page(
-        'UTM Grabber Settings',
-        'UTM Grabber',
+        __( 'UTM Grabber Settings', 'utm-grabber' ),
+        __( 'UTM Grabber', 'utm-grabber' ),
         'manage_options',
         'ska-utm-grabber',
         'utm_grabber_options_page'
     );
 }
-
 add_action( 'admin_menu', 'utm_grabber_add_admin_menu' );
 
 // Register settings
@@ -52,20 +52,19 @@ function utm_grabber_settings_init() {
 
     add_settings_section(
         'utm_grabber_section',
-        __( 'UTM Grabber Settings', 'utmGrabber' ),
+        __( 'UTM Grabber Settings', 'utm-grabber' ),
         'utm_grabber_settings_section_callback',
         'utmGrabber'
     );
 
     add_settings_field(
         'utm_grabber_base_url',
-        __( 'Base URL', 'utmGrabber' ),
+        __( 'Base URL', 'utm-grabber' ),
         'utm_grabber_base_url_render',
         'utmGrabber',
         'utm_grabber_section'
     );
 }
-
 add_action( 'admin_init', 'utm_grabber_settings_init' );
 
 function utm_grabber_base_url_render() {
@@ -76,22 +75,22 @@ function utm_grabber_base_url_render() {
 }
 
 function utm_grabber_settings_section_callback() {
-    echo __( 'Enter the base URL for the WhatsApp call to action link.', 'utmGrabber' );
+    echo __( 'Enter the base URL for the WhatsApp call to action link.', 'utm-grabber' );
 }
 
 function utm_grabber_options_page() {
     ?>
     <form action='options.php' method='post'>
-        <h1>UTM Grabber Settings</h1>
+        <h1><?php esc_html_e( 'UTM Grabber Settings', 'utm-grabber' ); ?></h1>
         <?php
         settings_fields( 'utmGrabber' );
         do_settings_sections( 'utmGrabber' );
         submit_button();
         ?>
-        <h2>Usage Instructions</h2>
-        <p>To use the WhatsApp call to action link in your posts or pages, insert the following shortcode:</p>
+        <h2><?php esc_html_e( 'Usage Instructions', 'utm-grabber' ); ?></h2>
+        <p><?php esc_html_e( 'To use the WhatsApp call to action link in your posts or pages, insert the following shortcode:', 'utm-grabber' ); ?></p>
         <code>[ska_utm_grabber_anchor]</code>
-        <p>This shortcode will display the WhatsApp icon link with the configured URL and UTM parameters.</p>
+        <p><?php esc_html_e( 'This shortcode will display the WhatsApp icon link with the configured URL and UTM parameters.', 'utm-grabber' ); ?></p>
     </form>
     <?php
 }
