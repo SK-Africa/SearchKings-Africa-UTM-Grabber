@@ -111,7 +111,7 @@ function utm_grabber_show_icon_render() {
 function utm_grabber_link_class_render() {
     $link_class = get_option('utm_grabber_link_class', 'sudonim-link');
     ?>
-    <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr($link_class); ?>' style="width: 100%;">
+    <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr($link_class); ?>' placeholder='<?php echo esc_attr($link_class); ?>' readonly style="width: 100%;">
     <?php
 }
 
@@ -123,7 +123,7 @@ function utm_grabber_settings_section_callback() {
 function utm_grabber_options_page() {
     ?>
     <form action='options.php' method='post'>
-        <h1><?php esc_html_e( 'SearchKings Africa UTM Grabber Settings', 'utm-grabber' ); ?></h1>
+        <!-- <h1><?php esc_html_e( 'SearchKings Africa UTM Grabber Settings', 'utm-grabber' ); ?></h1> -->
         <?php
         settings_fields( 'utmGrabber' );
         do_settings_sections( 'utmGrabber' );
@@ -139,8 +139,10 @@ function utm_grabber_options_page() {
         <p><?php esc_html_e( 'Example Shortcode Usage:', 'utm-grabber' ); ?></p>
         <code>[ska_utm_grabber_anchor]</code>
         <p><?php esc_html_e( 'This shortcode will display the WhatsApp icon link with the configured URL and UTM parameters if the icon is enabled.', 'utm-grabber' ); ?></p>
-        <p><?php esc_html_e( 'Example Class Usage:', 'utm-grabber' ); ?></p>
-        <code>&lt;a href="#" class="sudonim-link"&gt;Your Link Text&lt;/a&gt;</code>
+        <p><?php esc_html_e( 'Example Class Usage If Opting to Use Custom `button` or `a` Tag Link:', 'utm-grabber' ); ?></p>
+        <code>
+            &lt;a href="<?php echo esc_attr( get_option( 'utm_grabber_base_url' ) ); ?>" class="<?php echo esc_attr( get_option( 'utm_grabber_link_class' ) ); ?>"&gt;Your Link Text&lt;/a&gt;
+        </code>
         <p><?php esc_html_e( 'All links with the specified class will be dynamically updated with the configured URL and UTM parameters.', 'utm-grabber' ); ?></p>
     </form>
     <?php
