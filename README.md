@@ -1,8 +1,10 @@
+### README for Plugin Build Automation
+
 # SearchKings Africa UTM Grabber
 
 **Plugin Name:** SearchKings Africa UTM Grabber  
 **Description:** A plugin that dynamically updates an anchor tag link with UTM parameters from the current URL.  
-**Version:** 1.0.1  
+**Version:** 1.1.0  
 **Author:** SearchKings Africa  
 **License:** MIT  
 
@@ -14,7 +16,8 @@ The SearchKings Africa UTM Grabber plugin dynamically updates an anchor tag link
 
 - Dynamically appends UTM parameters to a predefined URL.
 - Stores UTM parameters in session storage to persist them across page navigations.
-- Provides an easy-to-use shortcode to display a WhatsApp call-to-action button.
+- Provides an option to show/hide a WhatsApp call-to-action button.
+- Dynamically updates links with a specified class.
 
 ## Installation
 
@@ -31,14 +34,20 @@ The SearchKings Africa UTM Grabber plugin dynamically updates an anchor tag link
 
 ## Usage
 
+### Configuring the Plugin
+
+1. **Navigate to Settings:**
+   - Go to `Settings > SearchKings Africa UTM Grabber`.
+
+2. **Configure the Base URL, Show Icon Option, and Link Class:**
+   - Enter the base URL for the WhatsApp call-to-action link.
+   - Check or uncheck the option to show the WhatsApp icon.
+   - Enter the class name for links that should be dynamically updated with the UTM parameters. The default class is `sudonim-link`.
+
 ### Adding the WhatsApp Call-to-Action Button
 
-1. **Configure the Base URL:**
-   - Go to `Settings > UTM Grabber`.
-   - Enter the base URL for the WhatsApp call-to-action link and save the settings.
-
-2. **Insert the Shortcode:**
-   - Add the shortcode `[ska_utm_grabber_anchor]` to any post, page, or widget where you want the WhatsApp button to appear.
+1. **If "Show WhatsApp Icon" is enabled:**
+   - Insert the shortcode `[ska_utm_grabber_anchor]` in any post, page, or widget where you want the WhatsApp button to appear.
 
 ### Example Shortcode Usage
 
@@ -46,9 +55,26 @@ The SearchKings Africa UTM Grabber plugin dynamically updates an anchor tag link
 [ska_utm_grabber_anchor]
 ```
 
-This shortcode will display the WhatsApp icon link with the configured URL and UTM parameters.
+This shortcode will display the WhatsApp icon link with the configured URL and UTM parameters if the icon is enabled.
+
+### Adding Dynamic Link Class
+
+1. **Add the specified class to your links:**
+   - Use the class specified in the settings (default: `sudonim-link`) for any links you want to be dynamically updated with the UTM parameters.
+
+### Example Class Usage
+
+```html
+<a href="#" class="sudonim-link">Your Link Text</a>
+```
+
+All links with the specified class will be dynamically updated with the configured URL and UTM parameters.
 
 ## Changelog
+
+### [1.0.1] - 2024-06-13
+- Added option to show/hide WhatsApp icon.
+- Added option to dynamically update links with a specified class.
 
 ### [1.0.0] - 2024-06-12
 - Initial release
@@ -56,10 +82,13 @@ This shortcode will display the WhatsApp icon link with the configured URL and U
 ## Frequently Asked Questions
 
 **Q1: How do I change the base URL for the WhatsApp link?**  
-A1: Navigate to `Settings > UTM Grabber` and update the base URL in the provided field.
+A1: Navigate to `Settings > SearchKings Africa UTM Grabber` and update the base URL in the provided field.
 
 **Q2: How do I make the WhatsApp button appear on every page?**  
 A2: Add the shortcode `[ska_utm_grabber_anchor]` to a template file that is included on all pages, such as `footer.php` or `header.php`.
+
+**Q3: How do I dynamically update links with UTM parameters?**  
+A3: Add the specified class (default: `sudonim-link`) to any links you want to be dynamically updated.
 
 ## License
 
@@ -97,6 +126,9 @@ PLUGIN_DIR="sk-utm-grabber-plugin"
 TEMP_DIR="${PLUGIN_DIR}-temp"
 ZIP_FILE="${PLUGIN_DIR}.zip"
 
+Continuing from where it left off:
+
+```sh
 # Step 1: Clean up any previous builds
 echo "Cleaning up previous builds..."
 rm -rf "$TEMP_DIR" "$ZIP_FILE"
