@@ -29,7 +29,22 @@ document.addEventListener('DOMContentLoaded', function () {
                 sudonimATag.href = newUrl;
             }
         }
+
+        // Update all links with the specified class
+        const linkClass = utmGrabberData.linkClass;
+        const links = document.querySelectorAll(`.${linkClass}`);
+        links.forEach(link => {
+            let newUrl;
+            if (utmGrabberData.baseUrl.includes('?')) {
+                const modifiedQueryString = storedQueryString.replace('?', '&');
+                newUrl = utmGrabberData.baseUrl + modifiedQueryString;
+                link.href = newUrl;
+            } else {
+                newUrl = utmGrabberData.baseUrl + storedQueryString;
+                link.href = newUrl;
+            }
+        });
     }
   
     processUrl();
-  });
+});
