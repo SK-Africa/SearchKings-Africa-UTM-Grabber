@@ -95,26 +95,29 @@ add_action( 'admin_init', 'utm_grabber_settings_init' );
 function utm_grabber_base_url_render() {
     $base_url = get_option('utm_grabber_base_url');
     ?>
-    <input type='text' name='utm_grabber_base_url' value='<?php echo esc_attr($base_url); ?>' style="width: 100%;”>
-<?php
+    <input type='text' name='utm_grabber_base_url' value='<?php echo esc_attr($base_url); ?>' style="width: 100%; margin-bottom: 20px;">
+    <?php
+
+
 }
 
 function utm_grabber_show_icon_render() {
-$show_icon = get_option('utm_grabber_show_icon', 'yes');
-?>
-<input type='checkbox' name='utm_grabber_show_icon' value='yes' > 
-<?php
+    $show_icon = get_option('utm_grabber_show_icon', 'yes');
+    ?>
+    <input type='checkbox' name='utm_grabber_show_icon' value='yes' <?php checked($show_icon, 'yes'); ?>> <?php _e( 'Show the WhatsApp icon', 'utm-grabber' ); ?>
+    <?php
 }
 
 function utm_grabber_link_class_render() {
-$link_class = get_option('utm_grabber_link_class', 'sudonim-link');
-?>
-
-<?php
+    $link_class = get_option('utm_grabber_link_class', 'sudonim-link');
+    ?>
+    <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr($link_class); ?>' style="width: 100%;">
+    <?php
 }
 
+
 function utm_grabber_settings_section_callback() {
-echo __( 'Enter the settings for the SearchKings Africa UTM Grabber plugin.', 'utm-grabber' );
+    echo __( 'Enter the settings for the SearchKings Africa UTM Grabber plugin.', 'utm-grabber' );
 }
 
 function utm_grabber_options_page() {
@@ -142,3 +145,4 @@ function utm_grabber_options_page() {
     </form>
     <?php
 }
+?>
