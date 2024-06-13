@@ -132,7 +132,7 @@ function utm_grabber_options_page() {
         <h2><?php esc_html_e( 'Usage Instructions', 'utm-grabber' ); ?></h2>
         <p><?php esc_html_e( 'To use the WhatsApp call to action link in your posts or pages, follow these steps:', 'utm-grabber' ); ?></p>
         <ol>
-            <li><?php esc_html_e( 'Configure the Base URL, Show Icon Option, and Link Class in the settings below.', 'utm-grabber' ); ?></li>
+            <li><?php esc_html_e( 'Configure the Base URL, Show Icon Option in the settings above.', 'utm-grabber' ); ?></li>
             <li><?php esc_html_e( 'If the "Show WhatsApp Icon" option is enabled, use the shortcode [ska_utm_grabber_anchor] in any post, page, or widget where you want the WhatsApp button to appear.', 'utm-grabber' ); ?></li>
             <li><?php esc_html_e( 'To dynamically update all links with a specified class, add the class to your links. The default class is "sudonim-link".', 'utm-grabber' ); ?></li>
         </ol>
