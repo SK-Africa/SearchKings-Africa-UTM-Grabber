@@ -29,8 +29,8 @@ sk-utm-grabber-plugin-temp/
 *.sublime-project
 *.sublime-workspace
 
-# Ignoring the build script itself (if you prefer)
-build-plugin.sh
+# # Ignoring the build script itself (if you prefer)
+# build-plugin.sh
 
 # Composer (if using PHP dependencies)
 vendor/
