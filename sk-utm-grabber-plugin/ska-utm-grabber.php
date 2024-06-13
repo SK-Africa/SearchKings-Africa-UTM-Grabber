@@ -139,7 +139,7 @@ function utm_grabber_options_page() {
         <p><?php esc_html_e( 'Example Shortcode Usage:', 'utm-grabber' ); ?></p>
         <code>[ska_utm_grabber_anchor]</code>
         <p><?php esc_html_e( 'This shortcode will display the WhatsApp icon link with the configured URL and UTM parameters if the icon is enabled.', 'utm-grabber' ); ?></p>
-        <p><?php esc_html_e( 'Example Class Usage If Opting to Use Custom `button` or `a` Tag Link:', 'utm-grabber' ); ?></p>
+        <p><?php esc_html_e( 'Example Class Usage If Opting to Use Custom `a` Tag Link:', 'utm-grabber' ); ?></p>
         <code>
             &lt;a href="<?php echo esc_attr( get_option( 'utm_grabber_base_url' ) ); ?>" class="<?php echo esc_attr( get_option( 'utm_grabber_link_class' ) ); ?>"&gt;Your Link Text&lt;/a&gt;
         </code>
