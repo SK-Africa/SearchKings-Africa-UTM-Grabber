@@ -21,7 +21,7 @@ build/
 sk-utm-grabber-plugin-temp/
 
 # Plugin zip files
-*.zip
+# *.zip
 
 # IDE-specific files
 .vscode/

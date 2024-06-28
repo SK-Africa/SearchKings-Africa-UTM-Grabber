@@ -143,6 +143,8 @@ function utm_grabber_options_page() {
         <code>
             &lt;a href="<?php echo esc_attr( get_option( 'utm_grabber_base_url' ) ); ?>" class="<?php echo esc_attr( get_option( 'utm_grabber_link_class' ) ); ?>"&gt;Your Link Text&lt;/a&gt;
         </code>
+        <p><?php esc_html_e( 'For Elementor or any other page builder edit this in the button or anchor widget. See example below.', 'utm-grabber' ); ?></p>
+        <img src="<?php echo plugin_dir_url( __FILE__ ) . 'elementor-button-edit.png'; ?>" />
         <p><?php esc_html_e( 'All links with the specified class will be dynamically updated with the configured URL and UTM parameters.', 'utm-grabber' ); ?></p>
     </form>
     <?php
