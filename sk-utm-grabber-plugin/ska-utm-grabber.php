@@ -93,9 +93,9 @@ function utm_grabber_settings_init() {
 add_action( 'admin_init', 'utm_grabber_settings_init' );
 
 function utm_grabber_base_url_render() {
-    $base_url = get_option('utm_grabber_base_url');
+    $base_url = get_option('utm_grabber_base_url','https://rply.link/d/27600899357/SKWA?Link=https://searchkingsafrica.com/');
     ?>
-    <input type='text' name='utm_grabber_base_url' value='<?php echo esc_attr($base_url); ?>' style="width: 100%; margin-bottom: 20px;">
+    <input type='text' name='utm_grabber_base_url' value='<?php echo esc_attr($base_url); ?>' style="width: 80%; margin-bottom: 20px;" placeholder='<?php echo esc_attr($base_url); ?>'>
     <?php
 
 
@@ -111,7 +111,7 @@ function utm_grabber_show_icon_render() {
 function utm_grabber_link_class_render() {
     $link_class = get_option('utm_grabber_link_class', 'sudonim-link');
     ?>
-    <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr($link_class); ?>' placeholder='https://rply.link/d/27600899357/SKWA?Link=https://searchkingsafrica.com/' readonly style="width: 100%;">
+    <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr($link_class); ?>' placeholder='<?php echo esc_attr($link_class); ?>' readonly style="width: 80%;">
     <?php
 }
 
