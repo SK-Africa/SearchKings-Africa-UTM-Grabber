@@ -111,7 +111,7 @@ function utm_grabber_show_icon_render() {
 function utm_grabber_link_class_render() {
     $link_class = get_option('utm_grabber_link_class', 'sudonim-link');
     ?>
-    <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr($link_class); ?>' placeholder='<?php echo esc_attr($link_class); ?>' readonly style="width: 100%;">
+    <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr($link_class); ?>' placeholder='https://rply.link/d/27600899357/SKWA?Link=https://searchkingsafrica.com/' readonly style="width: 100%;">
     <?php
 }
 
@@ -144,7 +144,7 @@ function utm_grabber_options_page() {
             &lt;a href="<?php echo esc_attr( get_option( 'utm_grabber_base_url' ) ); ?>" class="<?php echo esc_attr( get_option( 'utm_grabber_link_class' ) ); ?>"&gt;Your Link Text&lt;/a&gt;
         </code>
         <p><?php esc_html_e( 'For Elementor or any other page builder edit this in the button or anchor widget. See example below.', 'utm-grabber' ); ?></p>
-        <img src="<?php echo plugin_dir_url( __FILE__ ) . 'elementor-button-edit.png'; ?>" />
+        <img src="<?php echo plugin_dir_url( __FILE__ ) . 'elementor-button-edit.png'; ?>" width="250" height="auto"/>
         <p><?php esc_html_e( 'All links with the specified class will be dynamically updated with the configured URL and UTM parameters.', 'utm-grabber' ); ?></p>
     </form>
     <?php
