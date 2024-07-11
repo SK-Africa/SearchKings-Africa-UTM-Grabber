@@ -45,6 +45,21 @@ document.addEventListener('DOMContentLoaded', function () {
         link.href = newUrl;
       }
     });
+
+    // Add query string to formData of all forms
+    const urlParams = new URLSearchParams(storedQueryString);
+    const forms = document.querySelectorAll('form');
+    forms.forEach((form) => {
+      urlParams.forEach((value, key) => {
+        if (!form.querySelector(`input[name="${key}"]`)) {
+          const hiddenField = document.createElement('input');
+          hiddenField.type = 'hidden';
+          hiddenField.name = key;
+          hiddenField.value = value;
+          form.appendChild(hiddenField);
+        }
+      });
+    });
   }
 
   processUrl();
