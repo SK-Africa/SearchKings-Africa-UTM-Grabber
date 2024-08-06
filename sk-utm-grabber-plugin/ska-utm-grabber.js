@@ -1,62 +1,68 @@
 document.addEventListener('DOMContentLoaded', function () {
   function processUrl() {
-    const originalUrl = window.location.href;
-    const originalUrlObject = new URL(originalUrl);
-    const queryString = originalUrlObject.search;
+    const urlParams = new URLSearchParams(window.location.search);
+    const utmParams = utmGrabberData.utmParams;
+    let hasUtmParams = false;
 
-    // Check if the URL contains UTM parameters
-    if (queryString.includes('utm')) {
-      // Store the UTM parameters in sessionStorage
-      sessionStorage.setItem('utmParams', queryString);
-    }
-
-    // Retrieve the UTM parameters from sessionStorage
-    const storedQueryString = sessionStorage.getItem('utmParams');
-
-    if (storedQueryString) {
-      // Get the anchor tag element by its ID
-      const sudonimATag = document.getElementById('sudonim-link');
-      const newBaseUrl = utmGrabberData.baseUrl;
-
-      // Append UTM parameters to the new base URL
-      let newUrl;
-      if (newBaseUrl.includes('?')) {
-        const modifiedQueryString = storedQueryString.replace('?', '&');
-        newUrl = newBaseUrl + modifiedQueryString;
-        if (sudonimATag) sudonimATag.href = newUrl;
-      } else {
-        newUrl = newBaseUrl + storedQueryString;
-        if (sudonimATag) sudonimATag.href = newUrl;
-      }
-    }
-
-    // Update all links with the specified class
-    const linkClass = utmGrabberData.linkClass;
-    const links = document.querySelectorAll(`.${linkClass}`);
-    if (!storedQueryString) return;
-    links.forEach((link) => {
-      let newUrl = utmGrabberData.baseUrl;
-      if (newUrl.includes('?')) {
-        const modifiedQueryString = storedQueryString.replace('?', '&');
-        newUrl += modifiedQueryString;
-        link.href = newUrl;
-      } else {
-        newUrl += modifiedQueryString;
-        link.href = newUrl;
+    // Check if any UTM parameter exists in the URL
+    utmParams.forEach((param) => {
+      if (urlParams.has(param)) {
+        hasUtmParams = true;
       }
     });
 
-    // Add query string to formData of all forms
-    const urlParams = new URLSearchParams(storedQueryString);
+    if (hasUtmParams) {
+      // Store UTM parameters in sessionStorage
+      sessionStorage.setItem('utmParams', window.location.search);
+    }
+
+    const storedParams = new URLSearchParams(
+      sessionStorage.getItem('utmParams'),
+    );
+
+    if (storedParams.toString()) {
+      // Update sudonim-link if it exists
+      updateSudonimLink(storedParams);
+
+      // Update all links with the specified class
+      updateClassLinks(storedParams);
+
+      // Add UTM parameters to all forms
+      addUtmToForms(storedParams);
+    }
+  }
+
+  function updateSudonimLink(params) {
+    const sudonimATag = document.getElementById('sudonim-link');
+    if (sudonimATag) {
+      const newBaseUrl = utmGrabberData.baseUrl;
+      let newUrl = new URL(newBaseUrl);
+      params.forEach((value, key) => {
+        newUrl.searchParams.append(key, value);
+      });
+      sudonimATag.href = newUrl.toString();
+    }
+  }
+
+  function updateClassLinks(params) {
+    const linkClass = utmGrabberData.linkClass;
+    const links = document.querySelectorAll(`.${linkClass}`);
+    links.forEach((link) => {
+      let newUrl = new URL(link.href);
+      params.forEach((value, key) => {
+        newUrl.searchParams.append(key, value);
+      });
+      link.href = newUrl.toString();
+    });
+  }
+
+  function addUtmToForms(params) {
     const forms = document.querySelectorAll('form');
     forms.forEach((form) => {
-      urlParams.forEach((value, key) => {
-        if (!form.querySelector(`input[name="${key}"]`)) {
-          const hiddenField = document.createElement('input');
-          hiddenField.type = 'hidden';
-          hiddenField.name = key;
-          hiddenField.value = value;
-          form.appendChild(hiddenField);
+      utmGrabberData.utmParams.forEach((param) => {
+        let input = form.querySelector(`input[name="${param}"]`);
+        if (input) {
+          input.value = params.get(param) || '';
         }
       });
     });

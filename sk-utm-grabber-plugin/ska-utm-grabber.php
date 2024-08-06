@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: SearchKings Africa UTM Grabber
- * Description: A plugin that dynamically updates an anchor tag link with UTM parameters from the current URL.
- * Version: 1.1.1
+ * Description: A plugin that dynamically updates links with UTM parameters and adds them to form fields.
+ * Version: 1.2.0
  * Author: SearchKings Africa
  * License: MIT
  * Text Domain: ska-utm-grabber
@@ -14,16 +14,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Enqueue the JavaScript and CSS
 function utm_grabber_enqueue_scripts() {
-    wp_enqueue_script( 'ska-utm-grabber-script', plugin_dir_url( __FILE__ ) . 'ska-utm-grabber.js', array(), '1.0', true );
+    wp_enqueue_script( 'ska-utm-grabber-script', plugin_dir_url( __FILE__ ) . 'ska-utm-grabber.js', array('jquery'), '1.2.0', true );
     wp_enqueue_style( 'ska-utm-grabber-style', plugin_dir_url( __FILE__ ) . 'ska-utm-grabber.css' );
+    
     // Pass the dynamic URL to JavaScript
     wp_localize_script( 'ska-utm-grabber-script', 'utmGrabberData', array(
         'baseUrl' => get_option( 'utm_grabber_base_url', 'https://rply.link/d/27600899357/SKWA?Link=https://searchkingsafrica.com/' ),
         'showIcon' => get_option( 'utm_grabber_show_icon', 'yes' ),
         'linkClass' => get_option( 'utm_grabber_link_class', 'sudonim-link' ),
+        'utmParams' => array('utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content')
     ) );
 }
-
 add_action( 'wp_enqueue_scripts', 'utm_grabber_enqueue_scripts' );
 
 // Add the anchor tag with shortcode
@@ -149,4 +150,17 @@ function utm_grabber_options_page() {
     </form>
     <?php
 }
+
+// Add this function to the end of your file
+function utm_grabber_add_hidden_fields() {
+    $utm_params = array('utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content');
+    
+    foreach ($utm_params as $param) {
+        echo "<input type='hidden' name='$param' value=''>";
+    }
+}
+add_action('elementor_pro/forms/render/before', 'utm_grabber_add_hidden_fields');
+add_action('gform_form_tag', 'utm_grabber_add_hidden_fields');
+add_action('wpforms_frontend_output', 'utm_grabber_add_hidden_fields', 10, 2);
+add_action('wpcf7_form_hidden_fields', 'utm_grabber_add_hidden_fields');
 ?>
