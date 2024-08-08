@@ -22,7 +22,7 @@ function utm_grabber_enqueue_scripts() {
         'baseUrl' => get_option( 'utm_grabber_base_url', 'https://rply.link/d/27600899357/SKWA?Link=https://searchkingsafrica.com/' ),
         'showIcon' => get_option( 'utm_grabber_show_icon', 'yes' ),
         'linkClass' => get_option( 'utm_grabber_link_class', 'sudonim-link' ),
-        'utmParams' => array('utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content')
+        'utmParams' => array('utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'device','keyword', 'network', 'placement','adposition','gad_source','gclid')
     ) );
 }
 add_action( 'wp_enqueue_scripts', 'utm_grabber_enqueue_scripts' );
@@ -151,16 +151,16 @@ function utm_grabber_options_page() {
     <?php
 }
 
-// Add this function to the end of your file
-function utm_grabber_add_hidden_fields() {
-    $utm_params = array('utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content');
+// // Add this function to the end of your file
+// function utm_grabber_add_hidden_fields() {
+//     $utm_params = array('utm_id', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content');
     
-    foreach ($utm_params as $param) {
-        echo "<input type='hidden' name='$param' value=''>";
-    }
-}
-add_action('elementor_pro/forms/render/before', 'utm_grabber_add_hidden_fields');
-add_action('gform_form_tag', 'utm_grabber_add_hidden_fields');
-add_action('wpforms_frontend_output', 'utm_grabber_add_hidden_fields', 10, 2);
-add_action('wpcf7_form_hidden_fields', 'utm_grabber_add_hidden_fields');
+//     foreach ($utm_params as $param) {
+//         echo "<input type='hidden' name='$param' value=''>";
+//     }
+// }
+// add_action('elementor_pro/forms/render/before', 'utm_grabber_add_hidden_fields');
+// add_action('gform_form_tag', 'utm_grabber_add_hidden_fields');
+// add_action('wpforms_frontend_output', 'utm_grabber_add_hidden_fields', 10, 2);
+// add_action('wpcf7_form_hidden_fields', 'utm_grabber_add_hidden_fields');
 ?>

@@ -60,7 +60,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const forms = document.querySelectorAll('form');
     forms.forEach((form) => {
       utmGrabberData.utmParams.forEach((param) => {
-        let input = form.querySelector(`input[name="${param}"]`);
+        let input = form.querySelector(
+          form.className === 'elementor-form'
+            ? `input[name="form_fields[${param}]"]`
+            : `input[name="${param}"]`,
+        );
         if (input) {
           input.value = params.get(param) || '';
         }
