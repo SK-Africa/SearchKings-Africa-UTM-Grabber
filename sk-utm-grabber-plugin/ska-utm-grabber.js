@@ -1,4 +1,9 @@
-document.addEventListener('DOMContentLoaded', function () {
+window.onload = function () {
+  // Short delay to ensure the URL has been updated
+  setTimeout(function () {
+    processUrl();
+  }, 3000); 
+
   function processUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const utmParams = utmGrabberData.utmParams;
