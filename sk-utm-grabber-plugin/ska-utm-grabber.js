@@ -58,10 +58,11 @@ function addUtmToForms(params) {
   forms.forEach((form) => {
     utmGrabberData.utmParams.forEach((param) => {
       let input = form.querySelector(
-        form.className === 'elementor-form'
-          ? `input[name="form_fields[${param}]"]`
-          : `input[name="${param}"]`,
+        `input[name="form_fields[${param}]"], input[name="${param}"]`,
       );
+      // Log to if UMT are being capture and Forms Fields are being
+      // console.log('UTM Params:', params.toString());
+      // console.log('Form Fields Found:', input ? 'Yes' : 'No');
       if (input) {
         input.value = params.get(param) || '';
       }
@@ -69,9 +70,17 @@ function addUtmToForms(params) {
   });
 }
 
-window.onload = function () {
-  // Short delay to ensure the URL has been updated
-  setTimeout(function () {
-    processUrl();
-  }, 2000);
-};
+document.addEventListener('DOMContentLoaded', function () {
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'childList') {
+        const forms = mutation.target.querySelectorAll('form');
+        if (forms.length > 0) {
+          processUrl();
+        }
+      }
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+});
