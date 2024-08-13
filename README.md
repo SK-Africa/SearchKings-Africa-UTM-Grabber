@@ -20,11 +20,54 @@ The SearchKings Africa UTM Grabber plugin dynamically updates links with UTM par
 
 ## Installation
 
-[Installation instructions remain the same]
+1. **Upload the Plugin:**
+   - Download the plugin ZIP file.
+   - Navigate to `Plugins > Add New` in your WordPress admin dashboard.
+   - Click `Upload Plugin` and select the downloaded ZIP file.
+   - Click `Install Now` and then `Activate`.
+
+2. **Manual Installation:**
+   - Unzip the downloaded plugin file.
+   - Upload the `sk-utm-grabber-plugin` directory to the `/wp-content/plugins/` directory.
+   - Activate the plugin through the `Plugins` menu in WordPress.
 
 ## Usage
 
-[Usage instructions for configuring the plugin, adding the WhatsApp button, and adding dynamic link class remain the same]
+### Configuring the Plugin
+
+1. **Navigate to Settings:**
+   - Go to `Settings > SearchKings Africa UTM Grabber`.
+
+2. **Configure the Base URL, Show Icon Option, and Link Class:**
+   - Enter the base URL for the WhatsApp call-to-action link.
+   - Check or uncheck the option to show the WhatsApp icon.
+   - The link class is set to "sudonim-link" by default and is read-only.
+
+### Adding the WhatsApp Call-to-Action Button
+
+1. **If "Show WhatsApp Icon" is enabled:**
+   - Insert the shortcode `[ska_utm_grabber_anchor]` in any post, page, or widget where you want the WhatsApp button to appear.
+
+### Example Shortcode Usage
+
+```
+[ska_utm_grabber_anchor]
+```
+
+This shortcode will display the WhatsApp icon link with the configured URL and UTM parameters if the icon is enabled.
+
+### Adding Dynamic Link Class
+
+1. **Add the specified class to your links:**
+   - Use the class "sudonim-link" for any links you want to be dynamically updated with the UTM parameters.
+
+### Example Class Usage
+
+```html
+<a href="#" class="sudonim-link">Your Link Text</a>
+```
+
+All links with the specified class will be dynamically updated with the configured URL and UTM parameters.
 
 ### Form Integration
 
@@ -66,13 +109,18 @@ The plugin will automatically populate these hidden fields with UTM data from th
 ## Operating Procedures
 
 1. **Setting Up the Plugin:**
-   [This section remains the same]
+   - After installation, go to the plugin settings page.
+   - Set the base URL for your WhatsApp link.
+   - Choose whether to show or hide the WhatsApp icon.
+   - The link class is pre-set to "sudonim-link" and cannot be changed.
 
 2. **Using the WhatsApp Button:**
-   [This section remains the same]
+   - If enabled, place the `[ska_utm_grabber_anchor]` shortcode where you want the button to appear.
+   - The button will automatically include UTM parameters from the current URL.
 
 3. **Updating Links Dynamically:**
-   [This section remains the same]
+   - Add the class "sudonim-link" to any links you want to update with UTM parameters.
+   - These links will be automatically updated when the page loads.
 
 4. **Form Integration:**
    - Add hidden input fields to your forms for each of the UTM parameters listed above.
@@ -81,10 +129,11 @@ The plugin will automatically populate these hidden fields with UTM data from th
    - No additional configuration is needed for this feature to work once the fields are added.
 
 5. **Maintaining the Plugin:**
-   [This section remains the same]
+   - Regularly check the plugin settings to ensure the base URL is correct.
+   - Update the plugin when new versions are available.
 
 6. **Troubleshooting:**
-   - If UTM parameters are not being added to forms, check if the hidden form fields with correct names exist in your form HTML.
+   - If UTM parameters are not being added to forms, check if the form fields with correct names exist.
    - Ensure JavaScript is enabled in the browser.
    - Check the browser console for any error messages related to the plugin.
    - Verify that the UTM parameters are present in the URL or session storage.
@@ -112,12 +161,6 @@ A2: Add the shortcode `[ska_utm_grabber_anchor]` to a template file that is incl
 
 **Q3: How do I dynamically update links with UTM parameters?**  
 A3: Add the class "sudonim-link" to any links you want to be dynamically updated.
-
-[Changelog remains the same]
-
-## Frequently Asked Questions
-
-[Previous FAQs remain, with the following changes:]
 
 **Q4: Do I need to modify my forms to include UTM parameters?**  
 A4: Yes, you need to add hidden input fields to your forms for each of the UTM parameters. The plugin will then automatically populate these fields with UTM data.
