@@ -1,16 +1,14 @@
-### README for Plugin Build Automation
-
 # SearchKings Africa UTM Grabber
 
 **Plugin Name:** SearchKings Africa UTM Grabber  
-**Description:** A plugin that dynamically updates an anchor tag link with UTM parameters from the current URL.  
-**Version:** 1.1.1  
+**Description:** A plugin that dynamically updates links with UTM parameters and adds them to form fields.  
+**Version:** 1.2.0  
 **Author:** SearchKings Africa  
 **License:** MIT  
 
 ## Description
 
-The SearchKings Africa UTM Grabber plugin dynamically updates an anchor tag link with UTM parameters from the current URL, ensuring that the parameters persist as users navigate through the site. This is particularly useful for tracking campaigns and maintaining consistent UTM tracking for analytics.
+The SearchKings Africa UTM Grabber plugin dynamically updates links with UTM parameters from the current URL, ensuring that the parameters persist as users navigate through the site. It also adds UTM parameters to form fields. This is particularly useful for tracking campaigns and maintaining consistent UTM tracking for analytics.
 
 ## Features
 
@@ -18,6 +16,7 @@ The SearchKings Africa UTM Grabber plugin dynamically updates an anchor tag link
 - Stores UTM parameters in session storage to persist them across page navigations.
 - Provides an option to show/hide a WhatsApp call-to-action button.
 - Dynamically updates links with a specified class.
+- Adds UTM parameters to form fields.
 
 ## Installation
 
@@ -42,7 +41,7 @@ The SearchKings Africa UTM Grabber plugin dynamically updates an anchor tag link
 2. **Configure the Base URL, Show Icon Option, and Link Class:**
    - Enter the base URL for the WhatsApp call-to-action link.
    - Check or uncheck the option to show the WhatsApp icon.
-   - Enter the class name for links that should be dynamically updated with the UTM parameters. The default class is `sudonim-link`.
+   - The link class is set to "sudonim-link" by default and is read-only.
 
 ### Adding the WhatsApp Call-to-Action Button
 
@@ -51,7 +50,7 @@ The SearchKings Africa UTM Grabber plugin dynamically updates an anchor tag link
 
 ### Example Shortcode Usage
 
-```html
+```
 [ska_utm_grabber_anchor]
 ```
 
@@ -60,7 +59,7 @@ This shortcode will display the WhatsApp icon link with the configured URL and U
 ### Adding Dynamic Link Class
 
 1. **Add the specified class to your links:**
-   - Use the class specified in the settings (default: `sudonim-link`) for any links you want to be dynamically updated with the UTM parameters.
+   - Use the class "sudonim-link" for any links you want to be dynamically updated with the UTM parameters.
 
 ### Example Class Usage
 
@@ -70,9 +69,46 @@ This shortcode will display the WhatsApp icon link with the configured URL and U
 
 All links with the specified class will be dynamically updated with the configured URL and UTM parameters.
 
+### Form Integration
+
+The plugin automatically adds UTM parameters to all forms on the page. No additional configuration is needed for this feature.
+
+## Operating Procedures
+
+1. **Setting Up the Plugin:**
+   - After installation, go to the plugin settings page.
+   - Set the base URL for your WhatsApp link.
+   - Choose whether to show or hide the WhatsApp icon.
+   - The link class is pre-set to "sudonim-link" and cannot be changed.
+
+2. **Using the WhatsApp Button:**
+   - If enabled, place the `[ska_utm_grabber_anchor]` shortcode where you want the button to appear.
+   - The button will automatically include UTM parameters from the current URL.
+
+3. **Updating Links Dynamically:**
+   - Add the class "sudonim-link" to any links you want to update with UTM parameters.
+   - These links will be automatically updated when the page loads.
+
+4. **Form Integration:**
+   - The plugin automatically adds UTM parameter fields to all forms.
+   - No manual configuration is needed for forms.
+
+5. **Maintaining the Plugin:**
+   - Regularly check the plugin settings to ensure the base URL is correct.
+   - Update the plugin when new versions are available.
+
+6. **Troubleshooting:**
+   - If UTM parameters are not being added, check if they are present in the URL.
+   - Ensure JavaScript is enabled in the browser.
+   - Check the browser console for any error messages related to the plugin.
+
 ## Changelog
 
-### [1.0.1] - 2024-06-13
+### [1.2.0] - 2024-08-13
+- Added automatic form integration for UTM parameters.
+- Improved error handling and performance.
+
+### [1.1.1] - 2024-06-13
 - Added option to show/hide WhatsApp icon.
 - Added option to dynamically update links with a specified class.
 
@@ -88,7 +124,10 @@ A1: Navigate to `Settings > SearchKings Africa UTM Grabber` and update the base 
 A2: Add the shortcode `[ska_utm_grabber_anchor]` to a template file that is included on all pages, such as `footer.php` or `header.php`.
 
 **Q3: How do I dynamically update links with UTM parameters?**  
-A3: Add the specified class (default: `sudonim-link`) to any links you want to be dynamically updated.
+A3: Add the class "sudonim-link" to any links you want to be dynamically updated.
+
+**Q4: Do I need to modify my forms to include UTM parameters?**  
+A4: No, the plugin automatically adds UTM parameter fields to all forms on the page.
 
 ## License
 
@@ -98,70 +137,3 @@ This plugin is licensed under the MIT License. See the LICENSE file for more det
 
 For support and further information, please contact SearchKings Africa.
 
-## Automation for Creating the Distributable ZIP File
-
-To automate the process of creating a distributable ZIP file for your WordPress plugin, you can use the provided `build-plugin.sh` script. This script copies the plugin directory to a temporary location, removes unnecessary files, creates a ZIP file, and then cleans up.
-
-### Steps to Use the Automation Script
-
-1. **Ensure the Script is Executable**:
-   Make the script executable by running the following command:
-   ```sh
-   chmod +x build-plugin.sh
-   ```
-
-2. **Run the Script**:
-   Execute the script to create the ZIP file:
-   ```sh
-   ./build-plugin.sh
-   ```
-
-### build-plugin.sh Script
-
-```sh
-#!/bin/bash
-
-# Variables
-PLUGIN_DIR="sk-utm-grabber-plugin"
-TEMP_DIR="${PLUGIN_DIR}-temp"
-ZIP_FILE="${PLUGIN_DIR}.zip"
-
-Continuing from where it left off:
-
-```sh
-# Step 1: Clean up any previous builds
-echo "Cleaning up previous builds..."
-rm -rf "$TEMP_DIR" "$ZIP_FILE"
-
-# Step 2: Copy the plugin directory to a temporary location
-echo "Copying plugin directory to temporary location..."
-if [ -d "$PLUGIN_DIR" ]; then
-    cp -r "$PLUGIN_DIR" "$TEMP_DIR"
-else
-    echo "Error: Directory $PLUGIN_DIR does not exist."
-    exit 1
-fi
-
-# Step 3: Remove the .git folder from the temporary copy
-echo "Removing .git folder..."
-rm -rf "${TEMP_DIR}/.git"
-
-# Step 4: Create a ZIP file from the temporary copy
-echo "Creating ZIP file..."
-if [ -d "$TEMP_DIR" ]; then
-    zip -r "$ZIP_FILE" "$TEMP_DIR"
-else
-    echo "Error: Temporary directory $TEMP_DIR does not exist."
-    exit 1
-fi
-
-# Step 5: Clean up the temporary copy
-echo "Cleaning up temporary files..."
-rm -rf "$TEMP_DIR"
-
-echo "Build completed successfully. ZIP file created: $ZIP_FILE"
-```
-
-### Summary
-
-By using the `build-plugin.sh` script, you can automate the process of creating a distributable ZIP file for your WordPress plugin. This script ensures that the `.git` folder is excluded without permanently deleting it.
