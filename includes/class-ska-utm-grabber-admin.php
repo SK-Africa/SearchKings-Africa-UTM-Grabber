@@ -38,7 +38,21 @@ class SKA_UTM_Grabber_Admin {
             'utm_grabber_section'
         );
 
-        // Add more settings fields...
+        add_settings_field(
+            'utm_grabber_show_icon',
+            __( 'Show WhatsApp Icon', 'ska-utm-grabber' ),
+            array( $this, 'utm_grabber_show_icon_render' ),
+            'utmGrabber',
+            'utm_grabber_section'
+        );
+
+        add_settings_field(
+            'utm_grabber_link_class',
+            __( 'Link Class', 'ska-utm-grabber' ),
+            array( $this, 'utm_grabber_link_class_render' ),
+            'utmGrabber',
+            'utm_grabber_section'
+        );
     }
 
     public function utm_grabber_settings_section_callback() {
@@ -52,5 +66,20 @@ class SKA_UTM_Grabber_Admin {
         <?php
     }
 
-    // Add more rendering methods for other settings fields...
+    public function utm_grabber_show_icon_render() {
+        $show_icon = get_option( 'utm_grabber_show_icon', 'yes' );
+        ?>
+        <select name='utm_grabber_show_icon'>
+            <option value='yes' <?php selected( $show_icon, 'yes' ); ?>><?php _e( 'Yes', 'ska-utm-grabber' ); ?></option>
+            <option value='no' <?php selected( $show_icon, 'no' ); ?>><?php _e( 'No', 'ska-utm-grabber' ); ?></option>
+        </select>
+        <?php
+    }
+
+    public function utm_grabber_link_class_render() {
+        $link_class = get_option( 'utm_grabber_link_class', 'sudonim-link' );
+        ?>
+        <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr( $link_class ); ?>' readonly>
+        <?php
+    }
 }
