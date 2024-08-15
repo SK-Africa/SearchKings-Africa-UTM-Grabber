@@ -14,7 +14,7 @@ validate_version() {
 }
 
 # Read the current version from the PHP file
-current_version=$(grep "define( 'SKA_UTM_GRABBER_VERSION'" $PLUGIN_DIR/ska-utm-grabber.php | sed "s/.*'\(.*\)'.*/\1/")
+current_version=$(grep "Version:" $PLUGIN_DIR/ska-utm-grabber.php | sed "s/.*Version: \(.*\)/\1/")
 
 # Check if version was found
 if [ -z "$current_version" ]; then
@@ -26,10 +26,6 @@ fi
 echo "Current version is $current_version"
 read -p "Enter new version number (or press enter to keep current version): " new_version
 
-# Initialize variables
-changelog_entry=""
-commit_message=""
-
 # If a new version is provided, update files
 if [ ! -z "$new_version" ]; then
     # Validate the new version
@@ -39,7 +35,7 @@ if [ ! -z "$new_version" ]; then
     sed -i "s/define( 'SKA_UTM_GRABBER_VERSION', '.*' )/define( 'SKA_UTM_GRABBER_VERSION', '$new_version' )/" $PLUGIN_DIR/ska-utm-grabber.php
 
     # Update the version in the plugin header
-    sed -i "s/Version: .*/Version: $new_version/" $PLUGIN_DIR/ska-utm-grabber.php
+    sed -i "s/\* Version: .*/\* Version: $new_version/" $PLUGIN_DIR/ska-utm-grabber.php
 
     # Update the version in the README.md file
     sed -i "s/Version: .*/Version: $new_version/" $PLUGIN_DIR/README.md
@@ -97,7 +93,7 @@ rm -f "${TEMP_DIR}/build-plugin.sh"
 # Step 5: Create the ZIP file
 echo "Creating ZIP file..."
 if [ -d "$TEMP_DIR" ]; then
-    (cd "$TEMP_DIR" && zip -r "../$ZIP_FILE" .)
+    (cd "$TEMP_DIR" && zip -r "../$ZIP_FILE-$new_version" .)
 else
     echo "Error: Temporary directory $TEMP_DIR does not exist."
     exit 1
@@ -115,7 +111,7 @@ if [ ! -z "$new_version" ]; then
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]
     then
-        git add $PLUGIN_DIR/ska-utm-grabber.php $PLUGIN_DIR/README.md
+        git add .
         git commit -m "$commit_message"
         echo "Changes committed with message: '$commit_message'"
         echo "Don't forget to push to your repository."
