@@ -40,18 +40,26 @@ if [ ! -z "$new_version" ]; then
     # Update the version in the README.md file
     sed -i "s/Version: .*/Version: $new_version/" $PLUGIN_DIR/README.md
 
-    # Update the changelog in README.md
-    today=$(date +%Y-%m-%d)
-    sed -i "/## Changelog/a \n### [$new_version] - $today\n- " $PLUGIN_DIR/README.md
-
-    # Prompt for changelog entry
-    echo "Enter changelog entry for version $new_version:"
-    read changelog_entry
-
-    # Add the changelog entry
-    sed -i "/### \[$new_version\] - $today/a - $changelog_entry" $PLUGIN_DIR/README.md
-
     echo "Version updated to $new_version"
+
+    # Ask if user wants to add a changelog entry
+    read -p "Do you want to add a changelog entry? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+        # Update the changelog in README.md
+        today=$(date +%Y-%m-%d)
+        sed -i "/## Changelog/a \n### [$new_version] - $today\n- " $PLUGIN_DIR/README.md
+
+        # Prompt for changelog entry
+        echo "Enter changelog entry for version $new_version:"
+        read changelog_entry
+
+        # Add the changelog entry
+        sed -i "/### \[$new_version\] - $today/a - $changelog_entry" $PLUGIN_DIR/README.md
+        
+        echo "Changelog entry added."
+    fi
 
     # Prompt for commit message
     echo "Enter a commit message (press enter to use default message):"
@@ -66,7 +74,7 @@ fi
 
 # Step 1: Clean up any previous builds
 echo "Cleaning up previous builds..."
-rm -rf "$TEMP_DIR" "$ZIP_FILE"
+rm -rf "$TEMP_DIR" "$ZIP_FILE-$current_version"
 
 # Step 2: Copy the plugin directory to a temporary location
 echo "Copying plugin directory to temporary location..."
@@ -103,7 +111,7 @@ fi
 echo "Cleaning up temporary files..."
 rm -rf "$TEMP_DIR"
 
-echo "Build completed successfully. ZIP file created: $ZIP_FILE"
+echo "Build completed successfully. ZIP file created: $ZIP_FILE-$new_version"
 
 # Optional: Git commands to stage and commit changes
 if [ ! -z "$new_version" ]; then
