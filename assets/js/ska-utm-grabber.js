@@ -26,6 +26,10 @@ function processUrl() {
 
     // Add UTM parameters to all forms
     addUtmToForms(storedParams);
+
+    // Determine channel and source, and add to forms
+    const channelInfo = determineChannelAndSource(storedParams);
+    addChannelInfoToForms(channelInfo);
   }
 }
 
@@ -67,6 +71,53 @@ function addUtmToForms(params) {
         input.value = params.get(param) || '';
       }
     });
+  });
+}
+
+function determineChannelAndSource(params) {
+  let channel = 'Organic';
+  let source = '';
+
+  const utmSource = params.get('utm_source');
+  const utmMedium = params.get('utm_medium');
+  const gclid = params.get('gclid');
+
+  if (utmSource) {
+    if (gclid || utmSource.toLowerCase().includes('google')) {
+      channel = 'Paid Search';
+      source = 'Google';
+    } else if (utmSource.toLowerCase().includes('bing')) {
+      channel = 'Paid Search';
+      source = 'Bing';
+    } else if (utmSource.toLowerCase().includes('yahoo')) {
+      channel = 'Paid Search';
+      source = 'Yahoo';
+    }
+  }
+
+  if (utmMedium && utmMedium.toLowerCase().includes('cpc')) {
+    channel = 'Paid Search';
+  }
+
+  return { channel, source };
+}
+
+function addChannelInfoToForms(channelInfo) {
+  const forms = document.querySelectorAll('form');
+  forms.forEach((form) => {
+    let channelInput = form.querySelector(
+      'input[name="form_fields[channel]"], input[name="channel"]',
+    );
+    let sourceInput = form.querySelector(
+      'input[name="form_fields[source]"], input[name="source"]',
+    );
+
+    if (channelInput) {
+      channelInput.value = channelInfo.channel;
+    }
+    if (sourceInput) {
+      sourceInput.value = channelInfo.source;
+    }
   });
 }
 
