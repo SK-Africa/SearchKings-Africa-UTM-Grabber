@@ -1,33 +1,35 @@
 <?php
-class SKA_UTM_Grabber {
-    private $admin;
-    private $public;
+/**
+ * Plugin Name: SearchKings Africa UTM Grabber
+ * Description: A plugin that dynamically updates links with UTM parameters and adds them to form fields.
+ * Version: 1.4.0
+ * Author: SearchKings Africa
+ * License: MIT
+ * Text Domain: ska-utm-grabber
+ * Domain Path: /languages
+ */
 
-    public function __construct() {
-        $this->load_dependencies();
-        $this->define_admin_hooks();
-        $this->define_public_hooks();
-    }
-
-    private function load_dependencies() {
-        require_once SKA_UTM_GRABBER_PATH . 'includes/class-ska-utm-grabber-admin.php';
-        require_once SKA_UTM_GRABBER_PATH . 'includes/class-ska-utm-grabber-public.php';
-
-        $this->admin = new SKA_UTM_Grabber_Admin();
-        $this->public = new SKA_UTM_Grabber_Public();
-    }
-
-    private function define_admin_hooks() {
-        add_action( 'admin_menu', array( $this->admin, 'add_plugin_admin_menu' ) );
-        add_action( 'admin_init', array( $this->admin, 'register_and_build_fields' ) );
-    }
-
-    private function define_public_hooks() {
-        add_action( 'wp_enqueue_scripts', array( $this->public, 'enqueue_scripts' ) );
-        add_shortcode( 'ska_utm_grabber_anchor', array( $this->public, 'anchor_shortcode' ) );
-    }
-
-    public function run() {
-        // Main plugin execution
-    }
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
 }
+
+// Define plugin constants
+define( 'SKA_UTM_GRABBER_VERSION', '1.4.0' );
+define( 'SKA_UTM_GRABBER_PATH', plugin_dir_path( __FILE__ ) );
+define( 'SKA_UTM_GRABBER_URL', plugin_dir_url( __FILE__ ) );
+
+// Include main plugin class
+require_once SKA_UTM_GRABBER_PATH . 'includes/class-ska-utm-grabber.php';
+
+// Initialize the plugin
+function ska_utm_grabber_init() {
+    $plugin = new SKA_UTM_Grabber();
+    $plugin->run();
+}
+add_action( 'plugins_loaded', 'ska_utm_grabber_init' );
+
+// Load plugin text domain
+function ska_utm_grabber_load_textdomain() {
+    load_plugin_textdomain( 'ska-utm-grabber', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+add_action( 'init', 'ska_utm_grabber_load_textdomain' );
