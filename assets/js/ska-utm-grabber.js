@@ -79,7 +79,7 @@ function addUtmToForms(params) {
 
 function determineChannelAndSource(params) {
   let channel = 'Organic';
-  let source = 'Direct';
+  let source = '';
 
   // Check if there are any search params
   if (params.toString()) {
