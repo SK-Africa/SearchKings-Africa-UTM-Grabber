@@ -1,44 +1,78 @@
-# Node modules directory (if you're using Node.js for build tools)
-node_modules/
-
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS-generated files
+# Operating System Files
 .DS_Store
 Thumbs.db
 
-# Temporary directories
-tmp/
-temp/
-
-# Build directories
-dist/
-build/
-sk-utm-grabber-plugin-temp/
-
-# Plugin zip files
-# *.zip
-
-# IDE-specific files
-.vscode/
-.idea/
+# Editor Files
 *.sublime-project
 *.sublime-workspace
+*.komodoproject
+.vscode/
+.idea/
 
-# # Ignoring the build script itself (if you prefer)
-# build-plugin.sh
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
 
-# Composer (if using PHP dependencies)
-vendor/
-composer.lock
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
 
-# PHPStorm specific files
-/.idea
-*.iml
+# Logs and databases
+*.log
+*.sql
+*.sqlite
 
-# Ignore macOS specific files
-._*
+# WordPress specific
+wp-config.php
+wp-content/advanced-cache.php
+wp-content/backup-db/
+wp-content/backups/
+wp-content/blogs.dir/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/uploads/
+wp-content/wp-cache-config.php
+
+# Plugin specific
+sk-utm-grabber-*.zip
+
+# Build files
+/build/
+/dist/
+
+# Dependency directories
+/vendor/
+/node_modules/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# PHPUnit
+.phpunit.result.cache
+
+# Composer
+composer.phar
+/vendor/
+
+# NPM/Yarn
+npm-debug.log
+yarn-error.log
