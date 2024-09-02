@@ -30,6 +30,9 @@ function processUrl() {
     // Determine channel and source, and add to forms
     const channelInfo = determineChannelAndSource(storedParams);
     addChannelInfoToForms(channelInfo);
+  } else {
+    // If no stored params, set channel to Organic and source to Direct
+    addChannelInfoToForms({ channel: 'Organic', source: 'Direct' });
   }
 }
 
@@ -76,27 +79,65 @@ function addUtmToForms(params) {
 
 function determineChannelAndSource(params) {
   let channel = 'Organic';
-  let source = '';
+  let source = 'Direct';
 
-  const utmSource = params.get('utm_source');
-  const utmMedium = params.get('utm_medium');
-  const gclid = params.get('gclid');
+  // Check if there are any search params
+  if (params.toString()) {
+    // Check for utm_source
+    const utmSource = params.get('utm_source');
+    if (utmSource) {
+      source = utmSource;
 
-  if (utmSource) {
-    if (gclid || utmSource.toLowerCase().includes('google')) {
-      channel = 'Paid Search';
-      source = 'Google';
-    } else if (utmSource.toLowerCase().includes('bing')) {
-      channel = 'Paid Search';
-      source = 'Bing';
-    } else if (utmSource.toLowerCase().includes('yahoo')) {
-      channel = 'Paid Search';
-      source = 'Yahoo';
+      // Determine channel based on utm_source
+      if (utmSource.toLowerCase().includes('google')) {
+        channel = 'Paid Search';
+      } else if (utmSource.toLowerCase().includes('facebook')) {
+        channel = 'Social';
+      } else if (utmSource.toLowerCase().includes('email')) {
+        channel = 'Email';
+      } else {
+        channel = 'Other';
+      }
     }
-  }
 
-  if (utmMedium && utmMedium.toLowerCase().includes('cpc')) {
-    channel = 'Paid Search';
+    // Check for utm_medium
+    const utmMedium = params.get('utm_medium');
+    if (utmMedium) {
+      if (
+        utmMedium.toLowerCase().includes('cpc') ||
+        utmMedium.toLowerCase().includes('ppc')
+      ) {
+        channel = 'Paid Search';
+      } else if (utmMedium.toLowerCase().includes('social')) {
+        channel = 'Social';
+      } else if (utmMedium.toLowerCase().includes('email')) {
+        channel = 'Email';
+      }
+    }
+
+    // Check for gclid (Google Click ID)
+    if (params.get('gclid')) {
+      channel = 'Paid Search';
+      source = source || 'Google';
+    }
+
+    // Check for utm_campaign
+    const utmCampaign = params.get('utm_campaign');
+    if (utmCampaign) {
+      // You can add additional logic here if needed
+    }
+
+    // Check for utm_term
+    const utmTerm = params.get('utm_term');
+    if (utmTerm) {
+      // You can add additional logic here if needed
+    }
+
+    // Check for utm_content
+    const utmContent = params.get('utm_content');
+    if (utmContent) {
+      // You can add additional logic here if needed
+    }
   }
 
   return { channel, source };

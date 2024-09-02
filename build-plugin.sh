@@ -3,7 +3,6 @@
 # Variables
 PLUGIN_DIR="."
 TEMP_DIR="sk-utm-grabber-temp"
-ZIP_FILE="sk-utm-grabber-$current_version.zip"
 MAIN_FILE="$PLUGIN_DIR/ska-utm-grabber.php"
 README_FILE="$PLUGIN_DIR/README.md"
 
@@ -27,6 +26,8 @@ fi
 # Display current version and prompt for new version
 echo "Current version is $current_version"
 read -p "Enter new version number (or press enter to keep current version): " new_version
+
+ZIP_FILE="sk-utm-grabber-$current_version.zip"
 
 # If a new version is provided, update files
 if [ ! -z "$new_version" ]; then
@@ -112,6 +113,7 @@ mkdir -p "$TEMP_DIR/languages"
 # Step 4: Remove unnecessary files from the temporary copy
 echo "Removing unnecessary files..."
 rm -f "$TEMP_DIR/build-plugin.sh"
+
 
 # Step 5: Create the ZIP file
 echo "Creating ZIP file..."
