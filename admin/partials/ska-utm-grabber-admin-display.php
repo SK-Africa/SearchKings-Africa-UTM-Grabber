@@ -1,43 +1,20 @@
 <?php
 // Check user capabilities
-if ( ! current_user_can( 'manage_options' ) ) {
+if (! current_user_can('manage_options')) {
     return;
 }
 
 // Show error/update messages
-settings_errors( 'utmGrabber_messages' );
+settings_errors('utmGrabber_messages');
 ?>
 <div class="wrap">
-    <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-    <form action="options.php" method="post">
-        <?php
-        settings_fields( 'utmGrabber' );
-        do_settings_sections( 'utmGrabber' );
-        submit_button( 'Save Settings' );
-        ?>
-    </form>
+    <!-- <h1><?php echo esc_html(get_admin_page_title()); ?></h1> -->
 
-    <hr>
-
-    <h2>User Guide</h2>
+    <h1>User Guide</h1>
     <div class="utm-grabber-guide">
-        <h3>How to Use SearchKings Africa UTM Grabber</h3>
-        
-        <h4>1. WhatsApp Button</h4>
-        <p>To add the WhatsApp button to your site:</p>
-        <ul>
-            <li>Set the "Show WhatsApp Icon" option to "Yes" above.</li>
-            <li>Use the shortcode <code>[ska_utm_grabber_anchor]</code> in your posts, pages, or widgets where you want the button to appear.</li>
-        </ul>
+        <h2>How to Use SearchKings Africa UTM Grabber</h2>
 
-        <h4>2. Dynamic Link Updating</h4>
-        <p>To automatically update links with UTM parameters:</p>
-        <ul>
-            <li>Add the class <code>sudonim-link</code> to any link you want to be dynamically updated.</li>
-            <li>Example: <code>&lt;a href="https://example.com" class="sudonim-link"&gt;Click here&lt;/a&gt;</code></li>
-        </ul>
-
-        <h4>3. Form Field Population</h4>
+        <h3>1. Form Field Population</h3>
         <p>The plugin automatically populates form fields with UTM data. Add these hidden fields to your forms:</p>
         <ul>
             <li><code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_term</code>, <code>utm_content</code></li>
@@ -56,7 +33,7 @@ settings_errors( 'utmGrabber_messages' );
         </pre>
         <p>For Elementor forms, add hidden fields with the same names.</p>
 
-        <h4>4. Traffic Source Detection</h4>
+        <h3>2. Traffic Source Detection</h3>
         <p>The plugin automatically detects and populates the following information:</p>
         <ul>
             <li><strong>Channel:</strong> Paid Search, Organic, Social, Email, or Other</li>
@@ -71,20 +48,24 @@ settings_errors( 'utmGrabber_messages' );
         background: #fff;
         padding: 20px;
         border-radius: 5px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
+
     .utm-grabber-guide h3 {
         border-bottom: 1px solid #eee;
         padding-bottom: 10px;
     }
-    .utm-grabber-guide h4 {
+
+    .utm-grabber-guide h3 {
         margin-top: 20px;
     }
+
     .utm-grabber-guide code {
         background: #f4f4f4;
         padding: 2px 5px;
         border-radius: 3px;
     }
+
     .utm-grabber-guide pre {
         background: #f4f4f4;
         padding: 10px;
@@ -92,4 +73,3 @@ settings_errors( 'utmGrabber_messages' );
         overflow-x: auto;
     }
 </style>
-<?php

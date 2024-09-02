@@ -18,12 +18,6 @@ function processUrl() {
   const storedParams = new URLSearchParams(sessionStorage.getItem('utmParams'));
 
   if (storedParams.toString()) {
-    // Update sudonim-link if it exists
-    updateSudonimLink(storedParams);
-
-    // Update all links with the specified class
-    updateClassLinks(storedParams);
-
     // Add UTM parameters to all forms
     addUtmToForms(storedParams);
 
@@ -34,30 +28,6 @@ function processUrl() {
     // If no stored params, set channel to Organic and source to Direct
     addChannelInfoToForms({ channel: 'Organic', source: 'Direct' });
   }
-}
-
-function updateSudonimLink(params) {
-  const sudonimATag = document.getElementById('sudonim-link');
-  if (sudonimATag) {
-    const newBaseUrl = utmGrabberData.baseUrl;
-    let newUrl = new URL(newBaseUrl);
-    params.forEach((value, key) => {
-      newUrl.searchParams.append(key, value);
-    });
-    sudonimATag.href = newUrl.toString();
-  }
-}
-
-function updateClassLinks(params) {
-  const linkClass = utmGrabberData.linkClass;
-  const links = document.querySelectorAll(`.${linkClass}`);
-  links.forEach((link) => {
-    let newUrl = new URL(link.href);
-    params.forEach((value, key) => {
-      newUrl.searchParams.append(key, value);
-    });
-    link.href = newUrl.toString();
-  });
 }
 
 function addUtmToForms(params) {

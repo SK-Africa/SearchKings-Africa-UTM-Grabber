@@ -2,20 +2,17 @@
 
 **Plugin Name:** SearchKings Africa UTM Grabber  
 **Description:** A WordPress plugin that dynamically updates links with UTM parameters, populates form fields with UTM data, and detects traffic channel and source.  
-**Version: 1.2.1**
+**Version: 1.0.0**
 **Author:** SearchKings Africa  
 **License:** MIT  
 
 ## Description
 
-The SearchKings Africa UTM Grabber plugin enhances your WordPress site's tracking capabilities by dynamically updating links with UTM parameters from the current URL. It ensures that UTM parameters persist as users navigate through your site, populates form fields with UTM data, and detects whether the traffic is from paid search or organic sources. This plugin is particularly useful for tracking marketing campaigns and maintaining consistent UTM tracking for analytics.
+The SearchKings Africa UTM Grabber plugin enhances your WordPress site's tracking capabilities. It ensures that UTM parameters persist as users navigate through your site, populates form fields with UTM data, and detects whether the traffic is from paid search or organic sources. This plugin is particularly useful for tracking marketing campaigns and maintaining consistent UTM tracking for analytics.
 
 ## Features
 
-- Dynamically appends UTM parameters to a predefined URL.
 - Stores UTM parameters in session storage to persist them across page navigations.
-- Provides an option to show/hide a WhatsApp call-to-action button.
-- Dynamically updates links with a specified class.
 - Populates form fields with UTM data.
 - Detects and populates form fields with traffic channel (Paid Search/Organic) and source (Google/Bing/Yahoo).
 - Compatible with standard WordPress forms and Elementor forms.
@@ -34,40 +31,6 @@ The SearchKings Africa UTM Grabber plugin enhances your WordPress site's trackin
    - Activate the plugin through the `Plugins` menu in WordPress.
 
 ## Usage
-
-### Configuring the Plugin
-
-1. **Navigate to Settings:**
-   - Go to `Settings > SearchKings Africa UTM Grabber` in your WordPress admin panel.
-
-2. **Configure the Base URL, Show Icon Option, and Link Class:**
-   - Enter the base URL for the WhatsApp call-to-action link.
-   - Check or uncheck the option to show the WhatsApp icon.
-   - The link class is set to "sudonim-link" by default and is read-only.
-
-### Adding the WhatsApp Call-to-Action Button
-
-If "Show WhatsApp Icon" is enabled:
-- Insert the shortcode `[ska_utm_grabber_anchor]` in any post, page, or widget where you want the WhatsApp button to appear.
-
-Example Shortcode Usage:
-```
-[ska_utm_grabber_anchor]
-```
-
-This shortcode will display the WhatsApp icon link with the configured URL and UTM parameters.
-
-### Adding Dynamic Link Class
-
-To dynamically update links with UTM parameters:
-- Add the class "sudonim-link" to any links you want to be updated.
-
-Example Class Usage:
-```html
-<a href="#" class="sudonim-link">Your Link Text</a>
-```
-
-All links with the specified class will be dynamically updated with the configured URL and UTM parameters.
 
 ### Form Integration
 
@@ -116,76 +79,29 @@ The plugin will automatically populate these hidden fields with UTM data from th
 
 ## Operating Procedures
 
-1. **Setting Up the Plugin:**
-   - After installation, go to the plugin settings page.
-   - Set the base URL for your WhatsApp link.
-   - Choose whether to show or hide the WhatsApp icon.
-   - The link class is pre-set to "sudonim-link" and cannot be changed.
-
-2. **Using the WhatsApp Button:**
-   - If enabled, place the `[ska_utm_grabber_anchor]` shortcode where you want the button to appear.
-   - The button will automatically include UTM parameters from the current URL.
-
-3. **Updating Links Dynamically:**
-   - Add the class "sudonim-link" to any links you want to update with UTM parameters.
-   - These links will be automatically updated when the page loads.
-
-4. **Form Integration:**
+1. **Form Integration:**
    - Add hidden input fields to your forms for each of the UTM parameters listed above, plus "channel" and "source".
    - Ensure the field names match exactly with the supported parameters.
    - The plugin will automatically populate these hidden fields with UTM data from the URL or session storage, and detect the traffic channel and source.
    - No additional configuration is needed for this feature to work once the fields are added.
 
-5. **Maintaining the Plugin:**
-   - Regularly check the plugin settings to ensure the base URL is correct.
-   - Update the plugin when new versions are available.
-
-6. **Troubleshooting:**
+2. **Troubleshooting:**
    - If UTM parameters or channel/source information are not being added to forms, check if the form fields with correct names exist.
    - Ensure JavaScript is enabled in the browser.
    - Check the browser console for any error messages related to the plugin.
    - Verify that the UTM parameters are present in the URL or session storage.
 
-## Changelog
-
-### [1.3.1] - 2024-08-16
-- Added compatibility with Elementor forms
-- Updated documentation for Elementor form integration
-
-### [1.3.0] - 2024-08-15
-- Added detection of traffic channel (Paid Search/Organic) and source (Google/Bing/Yahoo).
-- Updated form integration to include Channel and Source fields.
-
-### [1.2.0] - 2024-08-13
-- Added automatic form integration for UTM parameters.
-- Improved error handling and performance.
-
-### [1.1.1] - 2024-06-13
-- Added option to show/hide WhatsApp icon.
-- Added option to dynamically update links with a specified class.
-
-### [1.0.0] - 2024-06-12
-- Initial release
 
 ## Frequently Asked Questions
 
-**Q1: How do I change the base URL for the WhatsApp link?**  
-A1: Navigate to `Settings > SearchKings Africa UTM Grabber` and update the base URL in the provided field.
+**Q1: Do I need to modify my forms to include UTM parameters and channel/source information?**  
+A1: Yes, you need to add hidden input fields to your forms for each of the UTM parameters, plus "channel" and "source". The plugin will then automatically populate these fields with UTM data and detected channel/source information.
 
-**Q2: How do I make the WhatsApp button appear on every page?**  
-A2: Add the shortcode `[ska_utm_grabber_anchor]` to a template file that is included on all pages, such as `footer.php` or `header.php`.
+**Q2: What fields should I add to my forms?**  
+A2: You should add hidden fields for the following parameters: utm_id, utm_source, utm_medium, utm_campaign, utm_term, utm_content, device, keyword, network, placement, adposition, gad_source, gclid, channel, and source.
 
-**Q3: How do I dynamically update links with UTM parameters?**  
-A3: Add the class "sudonim-link" to any links you want to be dynamically updated.
-
-**Q4: Do I need to modify my forms to include UTM parameters and channel/source information?**  
-A4: Yes, you need to add hidden input fields to your forms for each of the UTM parameters, plus "channel" and "source". The plugin will then automatically populate these fields with UTM data and detected channel/source information.
-
-**Q5: What fields should I add to my forms?**  
-A5: You should add hidden fields for the following parameters: utm_id, utm_source, utm_medium, utm_campaign, utm_term, utm_content, device, keyword, network, placement, adposition, gad_source, gclid, channel, and source.
-
-**Q6: How do I add these fields to my forms?**  
-A6: Add hidden input fields to your form HTML. For example:
+**Q3: How do I add these fields to my forms?**  
+A3: Add hidden input fields to your form HTML. For example:
 ```html
 <input type="hidden" name="utm_source" value="">
 <input type="hidden" name="channel" value="">
@@ -193,11 +109,11 @@ A6: Add hidden input fields to your form HTML. For example:
 ```
 Repeat this for each parameter, changing the name attribute accordingly.
 
-**Q7: How does the plugin determine if traffic is from paid search or organic?**  
-A7: The plugin checks the utm_source parameter for known search engine names (Google, Bing, Yahoo) and the presence of a gclid parameter. It also checks if the utm_medium contains 'cpc'. If any of these conditions are met, it's considered paid search; otherwise, it's organic.
+**Q4: How does the plugin determine if traffic is from paid search or organic?**  
+A4: The plugin checks the utm_source parameter for known search engine names (Google, Bing, Yahoo) and the presence of a gclid parameter. It also checks if the utm_medium contains 'cpc'. If any of these conditions are met, it's considered paid search; otherwise, it's organic.
 
-**Q8: Is this plugin compatible with Elementor forms?**  
-A8: Yes, the plugin is compatible with both standard WordPress forms and Elementor forms. For Elementor forms, make sure to add hidden fields with the correct field IDs as described in the Form Integration section of this README.
+**Q5: Is this plugin compatible with Elementor forms?**  
+A5: Yes, the plugin is compatible with both standard WordPress forms and Elementor forms. For Elementor forms, make sure to add hidden fields with the correct field IDs as described in the Form Integration section of this README.
 
 ## License
 

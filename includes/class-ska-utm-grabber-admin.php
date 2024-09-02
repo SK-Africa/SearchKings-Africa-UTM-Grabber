@@ -76,10 +76,4 @@ class SKA_UTM_Grabber_Admin {
         <?php
     }
 
-    public function utm_grabber_link_class_render() {
-        $link_class = get_option( 'utm_grabber_link_class', 'sudonim-link' );
-        ?>
-        <input type='text' name='utm_grabber_link_class' value='<?php echo esc_attr( $link_class ); ?>' readonly>
-        <?php
-    }
 }
