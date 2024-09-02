@@ -5,6 +5,8 @@
  * Plugin URI: https://searchkingsafrica.com/utm-grabber
  * Description: A plugin that dynamically updates links with UTM parameters and adds them to form fields.
  * Version: 1.2.1
+ * Requires at least: 5.2
+ * Requires PHP: 7.2
  * Author: SearchKings Africa
  * Author URI: https://searchkingsafrica.com/
  * License: MIT
@@ -21,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants
-define( 'SKA_UTM_GRABBER_VERSION', '1.2.1' );
+define('SKA_UTM_GRABBER_VERSION', '1.2.1');
 define('SKA_UTM_GRABBER_PLUGIN_FILE', __FILE__);
 define('SKA_UTM_GRABBER_PLUGIN_BASENAME', plugin_basename(SKA_UTM_GRABBER_PLUGIN_FILE));
 define( 'SKA_UTM_GRABBER_PATH', plugin_dir_path( __FILE__ ) );
@@ -45,7 +47,8 @@ add_action( 'init', 'ska_utm_grabber_load_textdomain' );
 
 // Check and update plugin version
 function ska_utm_grabber_check_version() {
-    if ( version_compare( get_option( 'ska_utm_grabber_version' ), SKA_UTM_GRABBER_VERSION, '<' ) ) {
+    $stored_version = get_option('ska_utm_grabber_version');
+    if ($stored_version !== SKA_UTM_GRABBER_VERSION) {
         ska_utm_grabber_update();
     }
 }
@@ -64,20 +67,24 @@ function ska_utm_grabber_update() {
 function ska_utm_grabber_activate() {
     // Perform any necessary actions on plugin activation
     // This is a good place to set default options if needed
-    
+
     // Set the initial version in the database
-    add_option( 'ska_utm_grabber_version', SKA_UTM_GRABBER_VERSION );
+    update_option('ska_utm_grabber_version', SKA_UTM_GRABBER_VERSION);
 
     // Set default options
     add_option( 'utm_grabber_base_url', 'https://rply.link/d/27600899357/SKWA?Link=https://searchkingsafrica.com/' );
     add_option( 'utm_grabber_show_icon', 'yes' );
     add_option( 'utm_grabber_link_class', 'sudonim-link' );
+
+    // Flush rewrite rules
+    flush_rewrite_rules();
 }
 register_activation_hook(SKA_UTM_GRABBER_PLUGIN_FILE, 'ska_utm_grabber_activate');
 
 // Deactivation hook
 function ska_utm_grabber_deactivate() {
     // Perform any cleanup if necessary
+    flush_rewrite_rules();
 }
 register_deactivation_hook(SKA_UTM_GRABBER_PLUGIN_FILE, 'ska_utm_grabber_deactivate');
 
