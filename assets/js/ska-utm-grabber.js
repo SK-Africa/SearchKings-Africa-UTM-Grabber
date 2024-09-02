@@ -86,14 +86,27 @@ function determineChannelAndSource(params) {
     // Check for utm_source
     const utmSource = params.get('utm_source');
     if (utmSource) {
-      source = utmSource;
+      // Determine source based on utm_source
+      const lowerSource = utmSource.toLowerCase();
+      if (lowerSource.includes('google')) {
+        source = 'Google';
+      } else if (lowerSource.includes('bing')) {
+        source = 'Bing';
+      } else if (lowerSource.includes('yahoo')) {
+        source = 'Yahoo';
+      } else {
+        source = utmSource; // Use the utm_source value if it's not a recognized search engine
+      }
 
       // Determine channel based on utm_source
-      if (utmSource.toLowerCase().includes('google')) {
+      if (lowerSource.includes('cpc') || lowerSource.includes('ppc')) {
         channel = 'Paid Search';
-      } else if (utmSource.toLowerCase().includes('facebook')) {
+      } else if (
+        lowerSource.includes('facebook') ||
+        lowerSource.includes('instagram')
+      ) {
         channel = 'Social';
-      } else if (utmSource.toLowerCase().includes('email')) {
+      } else if (lowerSource.includes('email')) {
         channel = 'Email';
       } else {
         channel = 'Other';
@@ -103,14 +116,12 @@ function determineChannelAndSource(params) {
     // Check for utm_medium
     const utmMedium = params.get('utm_medium');
     if (utmMedium) {
-      if (
-        utmMedium.toLowerCase().includes('cpc') ||
-        utmMedium.toLowerCase().includes('ppc')
-      ) {
+      const lowerMedium = utmMedium.toLowerCase();
+      if (lowerMedium.includes('cpc') || lowerMedium.includes('ppc')) {
         channel = 'Paid Search';
-      } else if (utmMedium.toLowerCase().includes('social')) {
+      } else if (lowerMedium.includes('social')) {
         channel = 'Social';
-      } else if (utmMedium.toLowerCase().includes('email')) {
+      } else if (lowerMedium.includes('email')) {
         channel = 'Email';
       }
     }
@@ -118,7 +129,13 @@ function determineChannelAndSource(params) {
     // Check for gclid (Google Click ID)
     if (params.get('gclid')) {
       channel = 'Paid Search';
-      source = source || 'Google';
+      source = 'Google';
+    }
+
+    // Check for msclkid (Microsoft Click ID)
+    if (params.get('msclkid')) {
+      channel = 'Paid Search';
+      source = 'Bing';
     }
 
     // Check for utm_campaign

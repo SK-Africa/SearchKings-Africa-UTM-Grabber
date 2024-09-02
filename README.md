@@ -2,7 +2,7 @@
 
 **Plugin Name:** SearchKings Africa UTM Grabber  
 **Description:** A WordPress plugin that dynamically updates links with UTM parameters, populates form fields with UTM data, and detects traffic channel and source.  
-**Version: 1.2.0**
+**Version: 1.2.1**
 **Author:** SearchKings Africa  
 **License:** MIT  
 

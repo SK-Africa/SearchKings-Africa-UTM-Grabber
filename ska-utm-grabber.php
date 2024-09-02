@@ -4,7 +4,7 @@
  * Plugin Name: SearchKings Africa UTM Grabber
  * Plugin URI: https://searchkingsafrica.com/utm-grabber
  * Description: A plugin that dynamically updates links with UTM parameters and adds them to form fields.
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: SearchKings Africa
  * Author URI: https://searchkingsafrica.com/
  * License: MIT
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants
-define( 'SKA_UTM_GRABBER_VERSION', '1.2.0' );
+define( 'SKA_UTM_GRABBER_VERSION', '1.2.1' );
 define('SKA_UTM_GRABBER_PLUGIN_FILE', __FILE__);
 define('SKA_UTM_GRABBER_PLUGIN_BASENAME', plugin_basename(SKA_UTM_GRABBER_PLUGIN_FILE));
 define( 'SKA_UTM_GRABBER_PATH', plugin_dir_path( __FILE__ ) );
