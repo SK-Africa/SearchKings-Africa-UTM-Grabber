@@ -2,7 +2,7 @@
 
 **Plugin Name:** SearchKings Africa UTM Grabber  
 **Description:** A WordPress plugin that dynamically updates links with UTM parameters, populates form fields with UTM data, and detects traffic channel and source.  
-**Version: 1.0.0**
+**Version: 1.0.1**
 **Author:** SearchKings Africa  
 **License:** MIT  
 
@@ -40,21 +40,14 @@ The plugin populates form fields with UTM data and traffic channel/source inform
 
 Add the following hidden fields to your forms:
 
-1. utm_id
-2. utm_source
-3. utm_medium
-4. utm_campaign
-5. utm_term
-6. utm_content
-7. device
-8. keyword
-9. network
-10. placement
-11. adposition
-12. gad_source
-13. gclid
-14. channel
-15. source
+1. utm_campaign
+2. utm_content
+3. device
+4. keyword
+5. network
+6. gclid
+7. channel
+8. source
 
 Example for standard WordPress forms:
 ```html

@@ -17,15 +17,15 @@ settings_errors('utmGrabber_messages');
         <h3>1. Form Field Population</h3>
         <p>The plugin automatically populates form fields with UTM data. Add these hidden fields to your forms:</p>
         <ul>
-            <li><code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_term</code>, <code>utm_content</code></li>
-            <li><code>device</code>, <code>keyword</code>, <code>network</code>, <code>placement</code>, <code>adposition</code></li>
-            <li><code>gad_source</code>, <code>gclid</code>, <code>channel</code>, <code>source</code></li>
+            <li><code>utm_campaign</code>, <code>utm_content</code></li>
+            <li><code>device</code>, <code>keyword</code>, <code>network</code></li>
+            <li><code>gclid</code>, <code>channel</code>, <code>source</code></li>
         </ul>
         <p>Example for a standard form:</p>
         <pre>
 &lt;form&gt;
-    &lt;input type="hidden" name="utm_source" value=""&gt;
-    &lt;input type="hidden" name="utm_medium" value=""&gt;
+    &lt;input type="hidden" name="utm_campaign" value=""&gt;
+    &lt;input type="hidden" name="utm_content" value=""&gt;
     &lt;!-- Add other UTM fields similarly --&gt;
     &lt;input type="hidden" name="channel" value=""&gt;
     &lt;input type="hidden" name="source" value=""&gt;
