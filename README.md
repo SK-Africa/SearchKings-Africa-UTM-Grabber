@@ -88,6 +88,8 @@ The plugin will automatically populate these hidden fields with UTM data from th
    - Check the browser console for any error messages related to the plugin.
    - Verify that the UTM parameters are present in the URL or session storage.
 
+## Changelog
+
 
 ## Frequently Asked Questions
 
@@ -95,7 +97,7 @@ The plugin will automatically populate these hidden fields with UTM data from th
 A1: Yes, you need to add hidden input fields to your forms for each of the UTM parameters, plus "channel" and "source". The plugin will then automatically populate these fields with UTM data and detected channel/source information.
 
 **Q2: What fields should I add to my forms?**  
-A2: You should add hidden fields for the following parameters: utm_id, utm_source, utm_medium, utm_campaign, utm_term, utm_content, device, keyword, network, placement, adposition, gad_source, gclid, channel, and source.
+A2: You should add hidden fields for the following parameters: utm_source, utm_medium, utm_campaign, utm_term, utm_content, device, network, placement, adposition, gclid channel, and source.
 
 **Q3: How do I add these fields to my forms?**  
 A3: Add hidden input fields to your form HTML. For example:

@@ -77,7 +77,7 @@ if [ ! -z "$new_version" ]; then
     if [ ! -z "$custom_commit_message" ]; then
         commit_message="$custom_commit_message"
     else
-        commit_message="Bump version to $new_version"
+        commit_message="Bump version to $new_version - $changelog_entry"
     fi
 else
     new_version=$current_version
