@@ -7,6 +7,8 @@ if (! current_user_can('manage_options')) {
 // Show error/update messages
 settings_errors('utmGrabber_messages');
 ?>
+
+<?php wp_nonce_field('utm_grabber_nonce_action', 'utm_grabber_nonce'); ?>
 <div class="wrap">
     <!-- <h1><?php echo esc_html(get_admin_page_title()); ?></h1> -->
 
@@ -17,16 +19,25 @@ settings_errors('utmGrabber_messages');
         <h3>1. Form Field Population</h3>
         <p>The plugin automatically populates form fields with UTM data. Add these hidden fields to your forms:</p>
         <ul>
-            <li><code>utm_campaign</code>, <code>utm_content</code></li>
-            <li><code>device</code>, <code>keyword</code>, <code>network</code></li>
-            <li><code>gclid</code>, <code>channel</code>, <code>source</code></li>
+            <li><code>utm_source</code>,<code>utm_campaign</code>,<code>utm_medium</code>, <code>utm_content</code></li>
+            <li><code>utm_term</code>,<code>device</code>, <code>keyword</code>, <code>network</code>, <code>placement</code></li>
+            <li><code>adposition</code>,<code>gclid</code>, <code>channel</code>, <code>source</code></li>
         </ul>
         <p>Example for a standard form:</p>
         <pre>
 &lt;form&gt;
+    &lt;input type="hidden" name="utm_source" value=""&gt;
     &lt;input type="hidden" name="utm_campaign" value=""&gt;
+    &lt;input type="hidden" name="utm_medium" value=""&gt;
     &lt;input type="hidden" name="utm_content" value=""&gt;
+    &lt;input type="hidden" name="utm_term" value=""&gt;
     &lt;!-- Add other UTM fields similarly --&gt;
+    &lt;input type="hidden" name="device" value=""&gt;
+    &lt;input type="hidden" name="keyword" value=""&gt;
+    &lt;input type="hidden" name="network" value=""&gt;
+    &lt;input type="hidden" name="placement" value=""&gt;
+    &lt;input type="hidden" name="adposition" value=""&gt;
+    &lt;input type="hidden" name="gclid" value=""&gt;
     &lt;input type="hidden" name="channel" value=""&gt;
     &lt;input type="hidden" name="source" value=""&gt;
 &lt;/form&gt;

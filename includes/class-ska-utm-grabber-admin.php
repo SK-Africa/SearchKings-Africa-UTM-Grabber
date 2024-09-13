@@ -9,6 +9,7 @@ class SKA_UTM_Grabber_Admin {
             array( $this, 'display_plugin_admin_page' )
         );
     }
+    
 
     public function display_plugin_admin_page() {
         // Display admin settings page
@@ -31,4 +32,11 @@ class SKA_UTM_Grabber_Admin {
         echo __( 'Enter the settings for the SearchKings Africa UTM Grabber plugin.', 'ska-utm-grabber' );
     }
 
+    public function save_settings()
+    {
+        if (!isset($_POST['utm_grabber_nonce']) || !wp_verify_nonce($_POST['utm_grabber_nonce'], 'utm_grabber_nonce_action')) {
+            wp_die('Security check failed');
+        }
+        // Process and save settings
+    }
 }
