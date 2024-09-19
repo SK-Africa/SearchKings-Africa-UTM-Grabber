@@ -13,7 +13,8 @@
  * License URI: https://opensource.org/licenses/MIT
  * Text Domain: ska-utm-grabber
  * Domain Path: /languages
- *
+ * * Update URI: https://plugin.searchkingsafrica.com/wp-update-server/?action=get_metadata&slug=ska-utm-grabber
+ * 
  * @package SKA_UTM_Grabber
  */
 
@@ -86,3 +87,16 @@ register_deactivation_hook(SKA_UTM_GRABBER_PLUGIN_FILE, 'ska_utm_grabber_deactiv
 
 // Uninstall hook (typically defined in uninstall.php)
 // register_uninstall_hook( SKA_UTM_GRABBER_PLUGIN_FILE, 'ska_utm_grabber_uninstall' );
+
+if (!class_exists('SKA_UTM_Grabber_Updater')) {
+    require_once plugin_dir_path(__FILE__) . 'includes/class-ska-utm-grabber-updater.php';
+}
+
+function ska_utm_grabber_updater()
+{
+    $updater = new SKA_UTM_Grabber_Updater(
+        __FILE__,
+        'https://plugin.searchkingsafrica.com/wp-update-server/?action=get_metadata&slug=ska-utm-grabber'
+    );
+}
+add_action('init', 'ska_utm_grabber_updater');

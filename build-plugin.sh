@@ -119,7 +119,7 @@ rm -f "$TEMP_DIR/build-plugin.sh"
 echo "Creating ZIP file..."
 mkdir "ska-utm-grabber"
 cp -R "$TEMP_DIR"/* "ska-utm-grabber/"
-zip -r "sk-utm-grabber-$new_version.zip" "ska-utm-grabber"
+zip -r "sk-utm-grabber.zip" "ska-utm-grabber"
 rm -rf "ska-utm-grabber"
 
 # Step 6: Clean up the temporary directory
