@@ -5,8 +5,7 @@ class SKA_UTM_Grabber_Public {
         wp_enqueue_style( 'ska-utm-grabber-style', SKA_UTM_GRABBER_URL . 'assets/css/ska-utm-grabber.css', array(), SKA_UTM_GRABBER_VERSION );
 
         wp_localize_script('ska-utm-grabber-script', 'utmGrabberData', array(
-            'utmParams' => array('utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'
-            'device', 'network', 'placement', 'adposition', 'gclid')
+            'utmParams' => array('utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'device', 'network', 'placement', 'adposition', 'gclid')
         ) );
     }
 
