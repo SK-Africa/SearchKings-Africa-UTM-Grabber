@@ -2,7 +2,7 @@
 
 **Plugin Name:** SearchKings Africa UTM Grabber  
 **Description:** A WordPress plugin that dynamically updates links with UTM parameters, populates form fields with UTM data, and detects traffic channel and source.  
-**Version: 1.0.3**
+**Version: 1.0.4**
 **Author:** SearchKings Africa  
 **License:** MIT  
 
@@ -52,6 +52,7 @@ Add the following hidden fields to your forms:
 10. gclid
 11. channel
 12. source
+13. keyword
 
 Example for standard WordPress forms:
 ```html
@@ -97,7 +98,7 @@ The plugin will automatically populate these hidden fields with UTM data from th
 A1: Yes, you need to add hidden input fields to your forms for each of the UTM parameters, plus "channel" and "source". The plugin will then automatically populate these fields with UTM data and detected channel/source information.
 
 **Q2: What fields should I add to my forms?**  
-A2: You should add hidden fields for the following parameters: utm_source, utm_medium, utm_campaign, utm_term, utm_content, device, network, placement, adposition, gclid channel, and source.
+A2: You should add hidden fields for the following parameters: utm_source, utm_medium, utm_campaign, utm_term, utm_content, device, network, placement, adposition, gclid, keyword, channel, and source.
 
 **Q3: How do I add these fields to my forms?**  
 A3: Add hidden input fields to your form HTML. For example:
