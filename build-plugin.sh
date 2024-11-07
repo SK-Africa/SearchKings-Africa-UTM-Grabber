@@ -5,6 +5,7 @@ PLUGIN_DIR="."
 TEMP_DIR="sk-utm-grabber-temp"
 MAIN_FILE="$PLUGIN_DIR/ska-utm-grabber.php"
 README_FILE="$PLUGIN_DIR/README.md"
+ZIP_PREFIX="sk-utm-grabber-"
 
 # Function to validate version number
 validate_version() {
@@ -12,6 +13,24 @@ validate_version() {
         echo "Invalid version number. Please use semantic versioning (e.g., 1.2.3)."
         exit 1
     fi
+}
+
+# Function to ensure changelog section exists
+ensure_changelog_section() {
+    if ! grep -q "^## Changelog" "$README_FILE"; then
+        # Add Changelog section before License section
+        sed -i.bak '/## License/i\## Changelog\n\n' "$README_FILE"
+        rm -f "$README_FILE.bak"
+        echo "Created Changelog section"
+    fi
+}
+
+# Function to clean up old ZIP files
+cleanup_old_zips() {
+    local current_zip="$1"
+    # Remove all sk-utm-grabber-*.zip files except the current one
+    find . -maxdepth 1 -name "${ZIP_PREFIX}*.zip" ! -name "$current_zip" -type f -delete
+    echo "Cleaned up old ZIP files."
 }
 
 # Read the current version from the PHP file
@@ -26,8 +45,6 @@ fi
 # Display current version and prompt for new version
 echo "Current version is $current_version"
 read -p "Enter new version number (or press enter to keep current version): " new_version
-
-ZIP_FILE="sk-utm-grabber-$current_version.zip"
 
 # If a new version is provided, update files
 if [ ! -z "$new_version" ]; then
@@ -48,27 +65,28 @@ if [ ! -z "$new_version" ]; then
     # Remove backup files created by sed
     rm "$MAIN_FILE.bak" "$README_FILE.bak"
 
-    # Ask if user wants to add a changelog entry
-    read -p "Do you want to add a changelog entry? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]
-    then
-        # Update the changelog in README.md
-        today=$(date +%Y-%m-%d)
-        sed -i.bak "/## Changelog/a \n### [$new_version] - $today\n- " "$README_FILE"
+    # Ensure changelog section exists
+    ensure_changelog_section
 
-        # Prompt for changelog entry
-        echo "Enter changelog entry for version $new_version:"
+    # Require changelog entry for version updates
+    echo "A changelog entry is required for version updates."
+    echo "Enter changelog entry for version $new_version:"
+    read changelog_entry
+
+    # Keep prompting until a changelog entry is provided
+    while [ -z "$changelog_entry" ]; do
+        echo "Changelog entry cannot be empty. Please enter a description of the changes:"
         read changelog_entry
+    done
 
-        # Add the changelog entry
-        sed -i.bak "/### \[$new_version\] - $today/a - $changelog_entry" "$README_FILE"
-        
-        echo "Changelog entry added."
-        
-        # Remove backup file created by sed
-        rm "$README_FILE.bak"
-    fi
+    # Add the changelog entry
+    today=$(date +%Y-%m-%d)
+    sed -i.bak "/## Changelog/a\\\\n### [$new_version] - $today\\n- $changelog_entry\\n" "$README_FILE"
+    
+    echo "Changelog entry added."
+    
+    # Remove backup file created by sed
+    rm -f "$README_FILE.bak"
 
     # Prompt for commit message
     echo "Enter a commit message (press enter to use default message):"
@@ -83,9 +101,12 @@ else
     new_version=$current_version
 fi
 
+# Define ZIP filename
+ZIP_FILE="${ZIP_PREFIX}${new_version}.zip"
+
 # Step 1: Clean up any previous builds
 echo "Cleaning up previous builds..."
-rm -rf "$TEMP_DIR" "$ZIP_FILE"
+rm -rf "$TEMP_DIR"
 
 # Step 2: Create a temporary directory and copy the plugin files
 echo "Creating temporary directory and copying plugin files..."
@@ -114,19 +135,24 @@ mkdir -p "$TEMP_DIR/languages"
 echo "Removing unnecessary files..."
 rm -f "$TEMP_DIR/build-plugin.sh"
 
-
 # Step 5: Create the ZIP file
 echo "Creating ZIP file..."
 mkdir "ska-utm-grabber"
 cp -R "$TEMP_DIR"/* "ska-utm-grabber/"
-zip -r "sk-utm-grabber.zip" "ska-utm-grabber"
+
+# Clean up old ZIP files before creating new one
+cleanup_old_zips "$ZIP_FILE"
+
+# Create new ZIP file
+zip -r "$ZIP_FILE" "ska-utm-grabber"
 rm -rf "ska-utm-grabber"
 
 # Step 6: Clean up the temporary directory
 echo "Cleaning up temporary files..."
 rm -rf "$TEMP_DIR"
 
-echo "Build completed successfully. ZIP file created: sk-utm-grabber-$new_version.zip"
+echo "Build completed successfully. ZIP file created: $ZIP_FILE"
+echo "Remember to always commit your work and push any changes to the remote repo -- TS ✨"
 
 # Optional: Git commands to stage and commit changes
 if [ ! -z "$new_version" ] && [ "$new_version" != "$current_version" ]; then

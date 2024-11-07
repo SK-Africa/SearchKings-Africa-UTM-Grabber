@@ -89,8 +89,6 @@ The plugin will automatically populate these hidden fields with UTM data from th
    - Check the browser console for any error messages related to the plugin.
    - Verify that the UTM parameters are present in the URL or session storage.
 
-## Changelog
-
 
 ## Frequently Asked Questions
 
@@ -115,11 +113,127 @@ A4: The plugin checks the utm_source parameter for known search engine names (Go
 **Q5: Is this plugin compatible with Elementor forms?**  
 A5: Yes, the plugin is compatible with both standard WordPress forms and Elementor forms. For Elementor forms, make sure to add hidden fields with the correct field IDs as described in the Form Integration section of this README.
 
-## License
+## Developer Guide
 
-This plugin is licensed under the MIT License. See the LICENSE file for more details.
+### Build Process
+
+The plugin includes a build script (`build-plugin.sh`) that automates the versioning and packaging process. Here's how to use it:
+
+1. **Prerequisites:**
+   - Bash shell environment (Linux/Mac/WSL)
+   - Git installed
+   - Execute permissions on the script (`chmod +x build-plugin.sh`)
+
+2. **Running the Build:**
+   ```bash
+   ./build-plugin.sh
+   ```
+   
+   The script will:
+   - Display the current version and prompt for a new version
+   - Update version numbers across all relevant files
+   - Optionally add a changelog entry
+   - Create a ZIP file ready for distribution
+   - Optionally commit changes to Git
+
+3. **Build Options:**
+   - Press Enter to keep the current version
+   - Enter a new version number (e.g., "1.0.5") to update the version
+   - Choose whether to add a changelog entry
+   - Provide a custom commit message or use the default
+
+### Project Structure
+
+```
+sk-utm-grabber/
+├── admin/
+│   └── partials/
+│       └── ska-utm-grabber-admin-display.php
+├── assets/
+│   ├── css/
+│   │   └── ska-utm-grabber.css
+│   └── js/
+│       └── ska-utm-grabber.js
+├── includes/
+│   ├── class-ska-utm-grabber.php
+│   ├── class-ska-utm-grabber-admin.php
+│   └── class-ska-utm-grabber-public.php
+├── languages/
+├── build-plugin.sh
+├── README.md
+├── ska-utm-grabber.php
+└── uninstall.php
+```
+
+### Development Guidelines
+
+1. **Version Control:**
+   - Always use the build script to update versions
+   - Follow semantic versioning (MAJOR.MINOR.PATCH)
+   - Add meaningful changelog entries
+
+2. **Code Standards:**
+   - Follow WordPress Coding Standards
+   - Use PHP_CodeSniffer with WordPress rules
+   - Maintain proper documentation and comments
+
+3. **Testing:**
+   - Test with multiple form plugins (especially Elementor)
+   - Verify UTM parameter persistence across page navigation
+   - Check traffic source detection accuracy
+   - Test across different WordPress versions
+
+4. **JavaScript Development:**
+   - The main tracking logic is in `assets/js/ska-utm-grabber.js`
+   - Use ES6+ features with caution (consider browser compatibility)
+   - Maintain the MutationObserver for dynamic form detection
+
+5. **Form Compatibility:**
+   - Test new features with both standard WordPress forms and Elementor
+   - Maintain compatibility with existing field naming conventions
+   - Document any new field requirements
+
+### Key Files
+
+- `ska-utm-grabber.php`: Main plugin file
+- `class-ska-utm-grabber.php`: Core plugin class
+- `ska-utm-grabber.js`: UTM tracking and form population logic
+- `ska-utm-grabber-admin-display.php`: Admin interface template
+
+### Adding New Features
+
+1. Start by creating a new branch
+2. Update relevant PHP classes in `includes/`
+3. Add any new JavaScript to `assets/js/`
+4. Update the admin interface if needed
+5. Document changes in README.md
+6. Use build script to create a new version
+7. Test thoroughly before merging
+
+### Common Development Tasks
+
+1. **Adding New UTM Parameters:**
+   - Update `utmGrabberData.utmParams` array in `class-ska-utm-grabber-public.php`
+   - Add parameter handling in `ska-utm-grabber.js`
+   - Update documentation
+
+2. **Modifying Traffic Source Detection:**
+   - Edit the `determineChannelAndSource` function in `ska-utm-grabber.js`
+   - Update tests and documentation
+
+3. **Adding Admin Settings:**
+   - Add fields in `class-ska-utm-grabber-admin.php`
+   - Update the admin display template
+   - Add any necessary JavaScript/CSS
 
 ## Support
 
-For support and further information, please contact SearchKings Africa.
+For development support and contributions:
+1. Create issues in the repository for bugs or feature requests
+2. Follow the contribution guidelines
+3. Contact SearchKings Africa development team for access and questions
+
+## License
+
+This plugin is licensed under the MIT License. See the LICENSE file for more details.
 
